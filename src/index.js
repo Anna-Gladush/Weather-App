@@ -1,8 +1,8 @@
-import "./styles/style.css"
+import "./styles/style.css";
 import { weatherTools } from "./weatherTools.js";
 
-const lat = '21.30';
-const lon = '-157.86';
+// const lat = '21.30';
+// const lon = '-157.86';
 const API = '06d88c219a26346c3631c659748fc09b';
 
 const units = 'metric';

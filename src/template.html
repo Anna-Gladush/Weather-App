@@ -9,14 +9,19 @@
 <body>
   <header> 
     <h2>Weather forecast</h2>
-    <div>
-      <button>°C</button>
-      <button>°F</button>
+    <div class="button-metric">
+      <button class="active">°C</button>
+      <button class="not-active">°F</button>
     </div>
-    <img src="./assets/icons/map.svg" alt="map-icon" width="25px">
-    <p id="city">Honolulu, US</p>
-    <input type="text" placeholder="Search City">
-    <button class="submit">search</button>
+    <div class="city">
+      <img src="./assets/icons/map.svg" alt="map-icon" width="25px">
+      <p id="city">Honolulu, US</p>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="Search City" id="search-city">
+      <button class="submit"></button>
+    </div>
+
   </header>
   <main>
     <div class="weather">
