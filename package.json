@@ -1,32 +1,32 @@
 {
-  "name": "repository-template",
+  "name": "weather-app",
   "version": "1.0.0",
-  "description": "This repository serves as a quick template for new projects",
+  "description": "API used for this project: <a href=\"https://openweathermap.org/guide\">OpenWeather</a>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.prod.js",
-    "dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack",
+    "dev": "webpack serve",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Anna-Gladush/Repository-Template.git"
+    "url": "git+https://github.com/Anna-Gladush/Weather-App.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/Anna-Gladush/Repository-Template/issues"
+    "url": "https://github.com/Anna-Gladush/Weather-App/issues"
   },
-  "homepage": "https://github.com/Anna-Gladush/Repository-Template#readme",
+  "homepage": "https://github.com/Anna-Gladush/Weather-App#readme",
   "devDependencies": {
     "css-loader": "^7.1.4",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.6",
     "style-loader": "^4.0.0",
-    "webpack": "^5.105.4",
+    "webpack": "^5.106.0",
     "webpack-cli": "^7.0.2",
     "webpack-dev-server": "^5.2.3",
     "webpack-merge": "^6.0.1"

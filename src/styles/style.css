@@ -3,3 +3,13 @@
   margin: 0;
   box-sizing: border-box;
 }
+:root {
+  --compass-color: #e0c281;
+  --compass-accent: #475651;
+  --compass-red: #600c12;
+}
+
+.weather {
+  background-color: var(--compass-color);
+  width: 50vw
+}
