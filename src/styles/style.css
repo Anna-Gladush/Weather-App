@@ -67,8 +67,12 @@ input {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   border-left: none;
+  border: 1px solid;
 }
 .weather {
-  background-color: var(--compass-color);
-  width: 50vw;
+  /* background-color: var(--compass-color); */
+  width: 60vw;
+  height: 60vh;
+  border-radius: 20px;
+  border: 1px solid;
 }
