@@ -2,7 +2,16 @@
 
 API used for this project: <a href="https://openweathermap.org/guide">OpenWeather</a>
 
-Compass image: <a href="https://www.freepik.com/free-vector/retro-compasses-with-rose-wind-arrow-loop-antique-navigation-tools-isolated-icons-nautical-vintage-travel-objects-orienteering-marine-journey-cartoon-flat-vector-illustration_25917819.htm#fromView=search&page=4&position=45&uuid=c6902d62-bba5-4faa-80a5-723e7f4ede75&query=compass">Image by upklyak on Freepik</a>
+Sound: Sound Effect "Thunder Sound" by <a href="https://pixabay.com/users/soundreality-31074404/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=375727">Jurij</a>, Sound Effect "CALMING RAIN" by <a href="https://pixabay.com/users/liecio-3298866/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=257596">LIECIO</a>, Sound Effect "Forest,birds" by <a href="https://pixabay.com/users/dany_photo-42436275/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=319791">Dany_photo</a>
+
+Background photos: <a href="https://unsplash.com/photos/grassy-shore-of-a-calm-lake-with-hills-beyond-uX0-txbC9x8">Grassy shore of a calm lake with hills beyond</a> by <a href="https://unsplash.com/@pulchra_prospectus">Bahadir Cobanoglu</a>, <a href="https://unsplash.com/photos/clouds-in-the-sky-with-smoke-coming-out-of-it-LW_o-S1fmFk
+">clouds in the sky with smoke coming out of it</a> by <a href="https://unsplash.com/@carrie_borden">
+Carrie Borden</a>, <a href="https://unsplash.com/photos/a-full-moon-is-seen-through-the-clouds-6_sz4q0P4rk">a full moon is seen through the clouds</a> by <a href="https://unsplash.com/@s_ahmadreza_p">
+Ahmad Pishnamazi</a>, <a href="https://unsplash.com/photos/a-black-and-white-photo-of-snow-falling-PzhmEp_aDU4">a black and white photo of snow falling</a> by <a href="https://unsplash.com/@aditya1702">
+Aditya Vyas</a>, <a href="https://unsplash.com/photos/green-tree-rlLz08x6FFk">green tree</a> by <a href="https://unsplash.com/@oceanrahan">
+Ocean Rahan</a>, <a href="https://unsplash.com/photos/mountains-with-trees-under-white-star-at-night-L95xDkSSuWw
+">mountains with trees under white star at night</a> by <a href="https://unsplash.com/@nathananderson">
+Nathan Anderson</a>, <a href="https://unsplash.com/photos/grayscale-photo-of-trees-and-road-cM4OgdYWqFY">grayscale photo of trees and road</a> by <a href="https://unsplash.com/@presentsquare">Presentsquare</a>, <a href="https://unsplash.com/photos/single-cell-thunderstorm-JG_HfydoNqY">single cell thunderstorm</a> by <a href="https://unsplash.com/@noaa">NOAA</a>,<a href="https://unsplash.com/photos/white-clouds-and-blue-sky-during-daytime-3ihnKT5apmg">white clouds and blue sky during daytime</a> by <a href="https://unsplash.com/@enginakyurt">engin akyurt</a>, <a href="https://unsplash.com/photos/a-close-up-of-a-tree-branch-with-rain-2JvQ3gL4dqQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">a close up of a tree branch with rain</a> by <a href="https://unsplash.com/@jwvein">Janusz Walczak</a>, <a href="https://unsplash.com/photos/worms-eye-view-of-tree-covered-with-snow-klNpWLkgezo">worm's-eye view of tree covered with snow</a> by <a href="https://unsplash.com/@wilstewart3">Wil Stewart</a>,
 
 Forecast icons: <a href="https://www.freepik.com/free-vector/weather-icons-collection_1044316.htm#fromView=search&page=1&position=24&uuid=0998b45c-d684-4290-8002-f076301844ab&query=forecast">Image by bamdewanto on Freepik</a>
 

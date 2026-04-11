@@ -66,3 +66,9 @@ console.log(forecast_json.list[0]);
 
 console.log(weatherTools.windDirection('144'));
 console.log(weatherTools.BeaufortScale('16'));
+
+// AIR POLLUTION
+// http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API}
+const air_pollution = {"coord":{"lon":-157.86,"lat":21.3},"list":[{"main":{"aqi":1},"components":{"co":114.8,"no":0,"no2":0.12,"o3":40.37,"so2":0.07,"pm2_5":0.81,"pm10":2.36,"nh3":0},"dt":1775918362}]};
+
+console.log(air_pollution)
