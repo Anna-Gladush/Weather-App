@@ -15,6 +15,8 @@ Nathan Anderson</a>, <a href="https://unsplash.com/photos/grayscale-photo-of-tre
 
 Forecast icons: <a href="https://www.freepik.com/free-vector/weather-icons-collection_1044316.htm#fromView=search&page=1&position=24&uuid=0998b45c-d684-4290-8002-f076301844ab&query=forecast">Image by bamdewanto on Freepik</a>
 
+Woman in different seasons illustaration set: <a href="https://www.freepik.com/free-vector/woman-different-seasons-set_5889720.htm#fromView=search&page=1&position=33&uuid=a92f24d5-e6d9-4acc-a5eb-562bfe6613e8&query=human+weather">Image by pch.vector on Freepik</a>
+
 Reference for wind direction degree range:
 
 <table>
