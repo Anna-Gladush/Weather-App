@@ -98,8 +98,12 @@ main {
   flex-direction: column;
 }
 .info-left img,
-.card img {
+.card img,
+.wind-desc img {
   width: 40px;
+}
+.wind-desc {
+  display: flex;
 }
 .illustration {
   height: 50px;

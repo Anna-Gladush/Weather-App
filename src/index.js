@@ -40,28 +40,47 @@ const createIMG = (parent, src, alt) => {
   parent.appendChild(img);
   return img;
 }
+
+// 
+const w_name = json['weather']['main'];
+// const w_desc = json['weather']['description'];
+const temperature = Math.round(json['main']['temp']);
+const temperature_feels = Math.round(json['main']['feels_like']);
+const pressure = Math.round(json['main']['pressure']);
+const humidity = Math.round(json['main']['humidity']);
+const temp_max = Math.round(json['main']['temp_max']);
+const temp_min = Math.round(json['main']['temp_min']);
+const visibility = Math.round(json['visibility']);
+const speed = Math.round(json['wind']['speed']);
+const direction = json['wind']['deg']
+// json[main]
+
+// 
+
+
 createP(day, 'CURRENT WEATHER')
 const info = createDiv(day, 'day-info');
 const info_left = createDiv(info, 'info-left');
-const temp = createP(info_left, '23C');
+const temp = createP(info_left, `${temperature}°C`);
 createIMG(info_left, Photo, 'weather-icon')
 const info_right = createDiv(info, 'info-right');
-const weather_name = createP(info_right, 'Sunny');
-const weather_temp = createP(info_right, '24 / 21');
-const weather_desc = createP(info_right, 'Feels like 20');
-const hum = createDiv(day, 'humility');
-createP(hum, 'Humility');
-createP(hum, '86%');
-const pressure = createDiv(day, 'pressure');
-createP(pressure, 'Pressure');
-createP(pressure, '1013 hPa');
+const weather_name = createP(info_right, w_name);
+const weather_temp = createP(info_right, `${temp_min}°C / ${temp_max}°C`);
+const weather_desc = createP(info_right, `Feels like ${temperature_feels}°C`);
+const hum = createDiv(day, 'humidity');
+createP(hum, 'Humidity');
+createP(hum, `${humidity}%`);
+const pressure_div = createDiv(day, 'pressure');
+createP(pressure_div, 'Pressure');
+createP(pressure_div, `${pressure} hPa`);
 const vis = createDiv(day, 'visibility');
 createP(vis, 'Visibility');
-createP(vis, '10km');
+createP(vis, `${visibility}`);
 const wind = createDiv(day, 'wind');
-createP(wind, 'SE');
-createP(wind, '7 km/h');
-createIMG(wind, Direct, 'wind-direction')
+const wind_desc = createDiv(wind, 'wind-desc')
+createP(wind_desc, weatherTools.windDirection(direction));
+createIMG(wind_desc, Direct, 'wind-direction')
+createP(wind, `${speed} km/h`);
 
 createIMG(illustration, girl, 'girl')
 
