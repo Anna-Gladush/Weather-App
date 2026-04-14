@@ -45,7 +45,7 @@ const info = createDiv(day, 'day-info');
 const info_left = createDiv(info, 'info-left');
 const temp = createP(info_left, '23C');
 createIMG(info_left, Photo, 'weather-icon')
-const info_right = createDiv(info, 'info-left');
+const info_right = createDiv(info, 'info-right');
 const weather_name = createP(info_right, 'Sunny');
 const weather_temp = createP(info_right, '24 / 21');
 const weather_desc = createP(info_right, 'Feels like 20');
@@ -76,6 +76,6 @@ const card = (date, img, name, temp, hum, pressure) => {
   createP(card, pressure);
 }
 
-for (let i = 6; i > 0; i--) {
+for (let i = 5; i > 0; i--) {
       card('11 April', Photo, 'weather-icon', '20 / 25', '86%', '1013hPa');
     }

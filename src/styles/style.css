@@ -20,7 +20,7 @@ header {
   display: flex;
   justify-content: space-between;
   width: 130px;
-  padding: 10px;
+  padding: 5px 10px;
   border-radius: 60px;
 }
 .button-metric button {
@@ -69,10 +69,50 @@ input {
   border-left: none;
   border: 1px solid;
 }
+main {
+  display: flex;
+  justify-content: center;
+}
 .weather {
-  /* background-color: var(--compass-color); */
-  width: 60vw;
-  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 95vw;
+  height: 90vh;
   border-radius: 20px;
   border: 1px solid;
+  padding-left: 20px
+}
+.today {
+  /* background-color: var(--compass-color); */
+
+  display: flex;
+}
+.day-info,
+.info-left {
+  display: flex;
+  width: 500px;
+}
+.info-right {
+  display: flex;
+  flex-direction: column;
+}
+.info-left img,
+.card img {
+  width: 40px;
+}
+.illustration {
+  height: 50px;
+  width: 50px;
+}
+.day {
+  display: flex;
+  flex-direction: column;
+}
+.forecast {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+}
+.card {
+  text-align: center;
 }
