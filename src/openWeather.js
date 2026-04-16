@@ -2,9 +2,12 @@
 // const lon = '-157.86';
 const API = '06d88c219a26346c3631c659748fc09b';
 
-const units = 'metric';
-const city = 'Honolulu';
-// url = `https://api.openweathermap.org/data/3.0/weather?q=${city}&units=${units}&appid=${API}`
+let units = 'metric';
+let city = 'Honolulu';
+// url = `https://api.openweathermap.org/data/3.0/weather?q=${city}&units=${units}&appid=${API}`;
+
+// const weatherData = 
+
 async function getWeatherData() {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${API}`;
 

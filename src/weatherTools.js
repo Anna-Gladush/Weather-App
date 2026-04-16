@@ -51,9 +51,13 @@ const weatherTools = (() => {
       return [6, 'Strong Breeze'];
     }
   }
+  const dateConverterUTC = (date) => {
+    return new Date(date*1000).toString()
+  }
   return {
     windDirection,
-    BeaufortScale
+    BeaufortScale,
+    dateConverterUTC
   }
 })()
 export { weatherTools }
