@@ -50,6 +50,16 @@ forecast_json.list.forEach(forecast => {
 
 // const API = '06d88c219a26346c3631c659748fc09b';
 
+const searchCity = () => {
+  const input = document.getElementById('search-city');
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      console.log(input.value.toLowerCase());
+      input.value = '';
+    }
+  })
+}
+
 const changeButtonClasses = (button, otherBTNClass) => {
   button.classList.add('active');
   button.classList.remove('not-active');
@@ -70,4 +80,5 @@ const unitsConverter = () => {
     }
   }))
 }
-unitsConverter()
+unitsConverter();
+searchCity();
