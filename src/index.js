@@ -22,14 +22,13 @@ const temp_min = Math.round(json['main']['temp_min']);
 const visibility = Math.round((json['visibility']*10/1000))/10;
 const speed = Math.round(json['wind']['speed']);
 const direction = json['wind']['deg']
-console.log(json['visibility'])
 
 
 createDOM.createCurrentWeatherDOM(temperature, Photo, w_name, temp_min, temp_max, temperature_feels, humidity, pressure, visibility, direction, Direct, speed, girl)
 
 
-for (let i = 5; i > 0; i--) {
-  createDOM.card('11 April', Photo, 'weather-icon', '20 / 25', '86%', '1013hPa');
+for (let i = 8; i > 0; i--) {
+  createDOM.card('11 April', Photo, 'weather-icon', temp_min, temp_max, '86%', '1013hPa');
 }
 
 

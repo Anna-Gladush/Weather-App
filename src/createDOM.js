@@ -49,12 +49,12 @@ const createDOM = (() => {
     createP(wind, `${speed} m/s`);
     createIMG(illustration, girl, 'girl');
   }
-  const card = (date, img, name, temp, hum, pressure) => {
+  const card = (date, img, name, temp_min, temp_max, hum, pressure) => {
     const forecast_div = document.querySelector('.forecast');
     const card = createDiv(forecast_div, 'card');
     createP(card, date);
     createIMG(card, img, name);
-    createP(card, temp);
+    createP(card, `${temp_min}°C / ${temp_max}°C`);
     createP(card, hum);
     createP(card, pressure);
   }
