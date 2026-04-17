@@ -1,5 +1,6 @@
 # Weather App
 
+Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
 API used for this project: <a href="https://openweathermap.org/guide">OpenWeather</a>
 
 <table>
