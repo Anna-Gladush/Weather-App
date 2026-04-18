@@ -1,4 +1,4 @@
-import { weatherTools } from "./weatherTools.js";
+import { weatherTools } from "d:/Code/WEB/weatherTools.js";
 
 const createDOM = (() => {
   const createDiv = (parent, class_name) => {
@@ -20,7 +20,7 @@ const createDOM = (() => {
     parent.appendChild(img);
     return img;
   }
-  const createCurrentWeatherDOM = (temperature, weather_icon = Photo, w_name, temp_min, temp_max, temperature_feels, humidity, pressure, visibility, direction, Direct, speed, girl) => {
+  const createCurrentWeatherDOM = (temp_word, temperature, weather_icon = Photo, condition, temp_min, temp_max, temperature_feels, humidity, pressure, visibility, wind_dir, Direct, wind_mph,  uv, dewpoint, girl) => {
     const day = document.querySelector('.day');
     const illustration = document.querySelector('.illustration');
 
@@ -30,9 +30,9 @@ const createDOM = (() => {
     const temp = createP(info_left, `<span>${temperature}</span><sup>°C</sup>`);
     createIMG(info_left, weather_icon, 'weather-icon');
     const info_right = createDiv(info, 'info-right');
-    const weather_name = createP(info_right, w_name);
-    const weather_temp = createP(info_right, `${temp_min}°C / ${temp_max}°C`);
-    const weather_desc = createP(info_right, `Feels like ${temperature_feels}°C`);
+    const weather_name = createP(info_right, condition);
+    const weather_temp = createP(info_right, `${temp_min}${temp_word} / ${temp_max}${temp_word}`);
+    const weather_desc = createP(info_right, `Feels like ${temperature_feels}${temp_word}`);
     const hum = createDiv(day, 'humidity');
     createP(hum, 'Humidity');
     createP(hum, `${humidity}%`);
@@ -43,10 +43,15 @@ const createDOM = (() => {
     createP(vis, 'Visibility');
     createP(vis, `${visibility} km`);
     const wind = createDiv(day, 'wind');
-    const wind_desc = createDiv(wind, 'wind-desc')
-    createP(wind_desc, weatherTools.windDirection(direction));
-    createIMG(wind_desc, Direct, 'wind-direction')
-    createP(wind, `${speed} m/s`);
+    createP(wind, wind_dir);
+    createIMG(wind, Direct, 'wind-direction')
+    createP(wind, `${wind_mph} m/s`);
+    const uv_div = createDiv(day, 'uv');
+    createP(uv_div, 'UV');
+    createP(uv_div, uv);
+    const dew = createDiv(day, 'dew');
+    createP(uv_div, 'Dewpoint');
+    createP(dew, `${dewpoint}${temp_word}`);
     createIMG(illustration, girl, 'girl');
   }
   const card = (date, img, name, temp_min, temp_max, hum, pressure) => {

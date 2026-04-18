@@ -1,30 +1,51 @@
-import { format } from "date-fns";
 import "./styles/style.css";
-import { weatherTools } from "./weatherTools.js";
 import { createDOM } from "./createDOM.js";
-import { json, forecast_json, air_pollution } from "./openWeather.js";
+import { forecast } from "./weather-api.js";
 import Photo from './assets/icons/weather/01d.svg';
 import Direct from './assets/icons/direction/se.svg';
 import girl from './assets/illustrations/clear.svg';
 
-
-// const div = document.querySelector('.weather');
-
 // Variables
-const w_name = json['weather'][0]['main'];
-// const w_desc = json['weather'][0]['description'];
-const temperature = Math.round(json['main']['temp']);
-const temperature_feels = Math.round(json['main']['feels_like']);
-const pressure = Math.round(json['main']['pressure']);
-const humidity = Math.round(json['main']['humidity']);
-const temp_max = Math.round(json['main']['temp_max']);
-const temp_min = Math.round(json['main']['temp_min']);
-const visibility = Math.round((json['visibility']*10/1000))/10;
-const speed = Math.round(json['wind']['speed']);
-const direction = json['wind']['deg']
+
+const json = forecast;
+const location = json.location.name;
+
+const current = json.current;
+const forecast_json = json.forecast;
+console.log(current, forecast_json)
+
+const temp_c = current.temp_c;
+const temp_f = current.temp_f;
+const feelslike_c = current.feelslike_c;
+const feelslike_f = current.feelslike_f;
+const condition = current.condition.text;
+const icon = current.condition.icon;
+
+const wind_mph = current.wind_mph;
+const wind_dir = current.wind_dir;
+
+const pressure = current.pressure_mb;
+const humidity = current.humidity;
+const dewpoint_c = current.dewpoint_c;
+const dewpoint_f = current.dewpoint_f;
+
+const visibility = current.vis_km;
+const uv = current.uv;
+
+const maxtemp_c = forecast_json.forecastday[0].day.maxtemp_c;
+const mintemp_c = forecast_json.forecastday[0].day.mintemp_c;
+const maxtemp_f = forecast_json.forecastday[0].day.maxtemp_f;
+const mintemp_f = forecast_json.forecastday[0].day.mintemp_f;
+
+let temperature = temp_c;
+let temp_max = maxtemp_c;
+let temp_min= mintemp_c;
+let temperature_feels = feelslike_c;
+let dewpoint = dewpoint_c;
+let temp_word = '°C';
 
 
-createDOM.createCurrentWeatherDOM(temperature, Photo, w_name, temp_min, temp_max, temperature_feels, humidity, pressure, visibility, direction, Direct, speed, girl)
+createDOM.createCurrentWeatherDOM(temp_word, temperature, Photo, condition, temp_min, temp_max, temperature_feels, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint, girl)
 
 
 for (let i = 8; i > 0; i--) {
@@ -32,22 +53,11 @@ for (let i = 8; i > 0; i--) {
 }
 
 
-forecast_json.list.forEach(forecast => {
-  const date = weatherTools.dateConverterUTC(forecast.dt);
-  console.log(format(date, "dd MMM HH:mm"))
-})
+// forecast_json.list.forEach(forecast => {
+//   const date = weatherTools.dateConverterUTC(forecast.dt);
+//   console.log(format(date, "dd MMM HH:mm"))
+// })
 
-// import Photos from './assets/icons/weather/';
-
-// console.log(json);
-// console.log(new Date(json.dt));
-// console.log(forecast_json);
-// console.log(air_pollution);
-// console.log(weatherTools.windDirection('144'));
-// console.log(weatherTools.BeaufortScale('16'));
-
-
-// const API = '06d88c219a26346c3631c659748fc09b';
 
 const searchCity = () => {
   const input = document.getElementById('search-city');
@@ -89,27 +99,29 @@ searchCity();
 
 // .weather.id = id;
 // .weather.icon = icon;
-const id = '501'
-const weatherImages = () => {
-  if ([800].includes(id)) {
-    return 'clear sky'
-  } else if ([801].includes(id)) {
-    return 'few clouds'
-  } else if ([802].includes(id)) {
-    return 'scattered clouds'
-  } else if ([803, 804].includes(id)) {
-    return 'broken clouds'
-  } else if ([300, 301, 302, 310, 311, 312, 313, 314, 321, 520, 521, 522, 531].includes(id)) {
-    return 'shower rain'
-  } else if ([500, 501, 502, 503, 504].includes(id)) {
-    return 'rain'
-  } else if ([200, 201, 202,210, 211, 212, 221, 230, 231, 232].includes(id)) {
-    return 'thunderstorm'
-  } else if ([511, 600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622].includes(id)) {
-    return 'snow'
-  } else if ([701, 711, 721, 731, 741, 751, 761, 762, 771, 781].includes(id)) {
-    return 'mist'
-  }
-}
+// const id = '501'
+// const weatherImages = () => {
+//   if ([800].includes(id)) {
+//     return 'clear sky'
+//   } else if ([801].includes(id)) {
+//     return 'few clouds'
+//   } else if ([802].includes(id)) {
+//     return 'scattered clouds'
+//   } else if ([803, 804].includes(id)) {
+//     return 'broken clouds'
+//   } else if ([300, 301, 302, 310, 311, 312, 313, 314, 321, 520, 521, 522, 531].includes(id)) {
+//     return 'shower rain'
+//   } else if ([500, 501, 502, 503, 504].includes(id)) {
+//     return 'rain'
+//   } else if ([200, 201, 202,210, 211, 212, 221, 230, 231, 232].includes(id)) {
+//     return 'thunderstorm'
+//   } else if ([511, 600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622].includes(id)) {
+//     return 'snow'
+//   } else if ([701, 711, 721, 731, 741, 751, 761, 762, 771, 781].includes(id)) {
+//     return 'mist'
+//   }
+// }
     
 // setInterval(() => {const paragraph = <p>Current time: {dayjs().format('HH:mm:ss')}</p>; root.render(paragraph);})
+
+// import Photos from './assets/icons/weather/';
