@@ -1,10 +1,12 @@
 import "./styles/style.css";
+import { format } from "date-fns";
 import { createDOM } from "./createDOM.js";
 import { forecast } from "./weather-api.js";
 import Photo from './assets/icons/weather/01d.svg';
 import Direct from './assets/icons/direction/se.svg';
 import girl from './assets/illustrations/clear.svg';
 
+const div = document.querySelector('.weather');
 // Variables
 
 const json = forecast;
@@ -12,7 +14,6 @@ const location = json.location.name;
 
 const current = json.current;
 const forecast_json = json.forecast;
-console.log(current, forecast_json)
 
 const temp_c = current.temp_c;
 const temp_f = current.temp_f;
@@ -37,19 +38,28 @@ const mintemp_c = forecast_json.forecastday[0].day.mintemp_c;
 const maxtemp_f = forecast_json.forecastday[0].day.maxtemp_f;
 const mintemp_f = forecast_json.forecastday[0].day.mintemp_f;
 
-let temperature = temp_c;
-let temp_max = maxtemp_c;
-let temp_min= mintemp_c;
-let temperature_feels = feelslike_c;
-let dewpoint = dewpoint_c;
-let temp_word = '°C';
+createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
 
 
-createDOM.createCurrentWeatherDOM(temp_word, temperature, Photo, condition, temp_min, temp_max, temperature_feels, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint, girl)
+// FORECAST
+forecast_json.forecastday.forEach(day => {
+  console.log(format(new Date(day.date), 'E'));
+  console.log(format(new Date(day.date), "d MMMM"));
 
-
+  // console.log(day.astro);
+})
+const forecast_condition = forecast_json.forecastday.forEach(day => day.hour.forEach(weather => {
+  console.log(weather.condition.text);
+  console.log(format(new Date(weather.time), 'HH:mm'));
+  console.log(weather.temp_c);
+  console.log(weather.temp_f);
+  console.log(weather.humidity);
+  console.log(weather.pressure_mb);
+  }))
+console.log(forecast_json.forecastday[0].hour)
+console.log(forecast_condition)
 for (let i = 8; i > 0; i--) {
-  createDOM.card('11 April', Photo, 'weather-icon', temp_min, temp_max, '86%', '1013hPa');
+  createDOM.card('11 April', Photo, 'weather-icon', mintemp_c, maxtemp_c, '86%', '1013hPa');
 }
 
 
@@ -78,6 +88,7 @@ const changeButtonClasses = (button, otherBTNClass) => {
   other_btn.classList.add('not-active');
   other_btn.classList.remove('active');
 }
+
 const unitsConverter = () => {
   const buttons = document.querySelectorAll('.unit');
   buttons.forEach(button => button.addEventListener('click', () => {
@@ -87,11 +98,22 @@ const unitsConverter = () => {
     if (button.classList.contains('metric')) {
       changeButtonClasses(button, 'imperial');
       units = 'metric';
+
+      div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="forecast"></div>';
+      createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
+      for (let i = 8; i > 0; i--) {
+        createDOM.card('11 April', Photo, 'weather-icon', mintemp_c, maxtemp_c, '86%', '1013hPa');
+      }
     } else if (button.classList.contains('imperial')) {
       changeButtonClasses(button, 'metric');
       units = 'imperial';
+
+      div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="forecast"></div>';
+      createDOM.createCurrentWeatherDOM('°F', temp_f, Photo, condition, mintemp_f, maxtemp_f, feelslike_f, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_f, girl);
+      for (let i = 8; i > 0; i--) {
+        createDOM.card('11 April', Photo, 'weather-icon', mintemp_f, maxtemp_f, '86%', '1013hPa');
+      }
     }
-    console.log(units)
   }))
 }
 unitsConverter();

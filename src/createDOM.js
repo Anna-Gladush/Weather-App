@@ -1,4 +1,3 @@
-import { weatherTools } from "d:/Code/WEB/weatherTools.js";
 
 const createDOM = (() => {
   const createDiv = (parent, class_name) => {
@@ -27,7 +26,7 @@ const createDOM = (() => {
     createP(day, 'CURRENT WEATHER');
     const info = createDiv(day, 'day-info');
     const info_left = createDiv(info, 'info-left');
-    const temp = createP(info_left, `<span>${temperature}</span><sup>°C</sup>`);
+    const temp = createP(info_left, `<span>${temperature}</span><sup>${temp_word}</sup>`);
     createIMG(info_left, weather_icon, 'weather-icon');
     const info_right = createDiv(info, 'info-right');
     const weather_name = createP(info_right, condition);
@@ -63,12 +62,21 @@ const createDOM = (() => {
     createP(card, hum);
     createP(card, pressure);
   }
+  const dateSwitch = (now, tomorrow_day, after_day) => {
+    const div = document.querySelector('.weather'); 
+    const date_switch = createDiv(div, 'date-switch');
+    const today = createDiv(date_switch, 'switch current');
+    today.innerHTML = `<p>${now}</p>`
+    const tomorrow = createDiv(date_switch, 'switch');
+    const day_after = createDiv(date_switch, 'switch');
+  }
   return {
     createDiv,
     createIMG,
     createP,
     createCurrentWeatherDOM,
-    card
+    card,
+    dateSwitch
   }
 })()
 export { createDOM }
