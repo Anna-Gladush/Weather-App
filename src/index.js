@@ -40,30 +40,36 @@ const mintemp_c = forecast_json.forecastday[0].day.mintemp_c;
 const maxtemp_f = forecast_json.forecastday[0].day.maxtemp_f;
 const mintemp_f = forecast_json.forecastday[0].day.mintemp_f;
 
-createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
-
 
 // FORECAST
-forecast_json.forecastday.forEach(day => {
-  console.log(format(new Date(day.date), 'E'));
-  console.log(format(new Date(day.date), "d MMMM"));
+const createDateDivs = () => {
+  let id = 0;
+  forecast_json.forecastday.forEach(day => {
+    createDOM.dateSwitch(format(new Date(day.date), "d MMMM"), id);
+    id ++;
+  })
+  forecastDateSwitch();
 
-  // console.log(day.astro);
-})
+}
 
-// console.log(forecast_json.forecastday[0].hour);
 
-const forecast_condition = forecast_json.forecastday[0].hour.forEach(weather => {
+const forecast_condition = (array_num, temp_word) => {
+  document.querySelector('.forecast').innerHTML = '';
+  forecast_json.forecastday[array_num].hour.forEach(weather => {
   console.log(weather.condition);
   const time = format(new Date(weather.time), 'HH:mm');
-  const temp_c = weather.temp_c;
-  const temp_f = weather.temp_f;
   const hum = weather.humidity;
   const pre = weather.pressure_mb;
-  createDOM.card(time, Photo, 'weather-icon', temp_c, '°C', hum, pre);
-})
+  if (temp_word === '°C') {
+    let temperature = weather.temp_c;
+    createDOM.card(time, Photo, 'weather-icon', temperature, temp_word, hum, pre);
+  } else if (temp_word === '°F') {
+    let temperature = weather.temp_f;
+    createDOM.card(time, Photo, 'weather-icon', temperature, temp_word, hum, pre);
+  }
+})}
 
-console.log(forecast_json.forecastday[0].hour)
+// console.log(forecast_json.forecastday[0].hour)
 
 const searchCity = () => {
   const input = document.getElementById('search-city');
@@ -93,27 +99,46 @@ const unitsConverter = () => {
     if (button.classList.contains('metric')) {
       changeButtonClasses(button, 'imperial');
       units = 'metric';
-
-      div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="forecast"></div>';
+      
+      div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
       createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
-      for (let i = 8; i > 0; i--) {
-        createDOM.card('11 April', Photo, 'weather-icon', mintemp_c, maxtemp_c, '86%', '1013hPa');
-      }
+      forecast_condition(0, '°C')
     } else if (button.classList.contains('imperial')) {
       changeButtonClasses(button, 'metric');
       units = 'imperial';
 
-      div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="forecast"></div>';
-      createDOM.createCurrentWeatherDOM('°F', temp_f, Photo, condition, mintemp_f, maxtemp_f, feelslike_f, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_f, girl);
-      for (let i = 8; i > 0; i--) {
-        createDOM.card('11 April', Photo, 'weather-icon', mintemp_f, maxtemp_f, '86%', '1013hPa');
-      }
+      div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
+      createDOM.createCurrentWeatherDOM('°F', temp_f, Photo, condition, mintemp_f, maxtemp_f, feelslike_f, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_f, girl);     
+      forecast_condition(0, '°F')
     }
+    createDateDivs()
   }))
 }
+
+const forecastDateSwitch = () => {
+  const divs = document.querySelectorAll('.switch');
+
+  divs.forEach(div => div.addEventListener('click', () => {
+    if (div.classList.contains('current')) {
+      return;
+    }
+    const current = document.querySelector('.current');
+    current.classList.remove('current');
+    div.classList.add('current');
+    const id = div.id;
+    const unit = document.querySelector('.unit.active')
+    const temp_word = unit.classList.contains('metric') ? '°C' : '°F';
+    forecast_condition(id, temp_word)
+  }))
+}
+
+
 unitsConverter();
 searchCity();
+createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
+createDateDivs()
 
+forecast_condition(0, '°C');
 // .weather.id = id;
 // .weather.icon = icon;
 // const id = '501'

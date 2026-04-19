@@ -4,6 +4,21 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 API used for this project: <a href="https://openweathermap.org/guide">OpenWeather</a>
 
 <table>
+<caption>Information about Weather Conditions codes from <a href="https://www.weatherapi.com/docs/weather_conditions.xml">WeatherAPI</a></caption>
+  <tr>
+    <th>Weather category</th>
+    <th colspan="2">Icon</th>
+    <th>ID</th>
+  </tr>
+  <tr>
+    <td>clear sky</td>
+    <td>day <img src="https://github.com/Anna-Gladush/Weather-App/blob/main/src/assets/images/icons/weather/01d.svg"></td>
+    <td>night <img src="https://github.com/Anna-Gladush/Weather-App/blob/main/src/assets/images/icons/weather/01n.svg"></td>
+    <td>800</td>
+  </tr>
+<table>
+
+<table>
 <caption>Information about Weather Conditions IDs from <a href="https://openweathermap.org/weather-conditions">OpenWeather</a></caption>
   <tr>
     <th>Weather category</th>

@@ -49,7 +49,7 @@ const createDOM = (() => {
     createP(uv_div, 'UV');
     createP(uv_div, uv);
     const dew = createDiv(day, 'dew');
-    createP(uv_div, 'Dewpoint');
+    createP(dew, 'Dewpoint');
     createP(dew, `${dewpoint}${temp_word}`);
     createIMG(illustration, girl, 'girl');
   }
@@ -62,13 +62,14 @@ const createDOM = (() => {
     createP(card, `${hum}%`);
     createP(card, `${pressure} hPa`);
   }
-  const dateSwitch = (now, tomorrow_day, after_day) => {
-    const div = document.querySelector('.weather'); 
-    const date_switch = createDiv(div, 'date-switch');
-    const today = createDiv(date_switch, 'switch current');
-    today.innerHTML = `<p>${now}</p>`
-    const tomorrow = createDiv(date_switch, 'switch');
-    const day_after = createDiv(date_switch, 'switch');
+  const dateSwitch = (day, num) => {
+    const div = document.querySelector('.date-switch'); 
+    const current = createDiv(div, 'switch');
+    if (num === 0) {
+      current.classList.add('current')
+    }
+    current.innerHTML = `<p>${day}</p>`;
+    current.id = num;
   }
   return {
     createDiv,
