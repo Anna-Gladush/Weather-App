@@ -51,7 +51,7 @@ forecast_json.forecastday.forEach(day => {
   // console.log(day.astro);
 })
 
-  console.log(forecast_json.forecastday[0].hour);
+// console.log(forecast_json.forecastday[0].hour);
 
 const forecast_condition = forecast_json.forecastday[0].hour.forEach(weather => {
   console.log(weather.condition);
@@ -64,7 +64,6 @@ const forecast_condition = forecast_json.forecastday[0].hour.forEach(weather => 
 })
 
 console.log(forecast_json.forecastday[0].hour)
-console.log(forecast_condition)
 
 const searchCity = () => {
   const input = document.getElementById('search-city');
