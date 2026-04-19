@@ -10,7 +10,9 @@ const div = document.querySelector('.weather');
 // Variables
 
 const json = forecast;
-const location = json.location.name;
+
+const location = `${json.location.name}, ${json.location.region}`;
+document.getElementById('city').textContent = location;
 
 const current = json.current;
 const forecast_json = json.forecast;
@@ -48,26 +50,21 @@ forecast_json.forecastday.forEach(day => {
 
   // console.log(day.astro);
 })
-const forecast_condition = forecast_json.forecastday.forEach(day => day.hour.forEach(weather => {
-  console.log(weather.condition.text);
-  console.log(format(new Date(weather.time), 'HH:mm'));
-  console.log(weather.temp_c);
-  console.log(weather.temp_f);
-  console.log(weather.humidity);
-  console.log(weather.pressure_mb);
-  }))
+
+  console.log(forecast_json.forecastday[0].hour);
+
+const forecast_condition = forecast_json.forecastday[0].hour.forEach(weather => {
+  console.log(weather.condition);
+  const time = format(new Date(weather.time), 'HH:mm');
+  const temp_c = weather.temp_c;
+  const temp_f = weather.temp_f;
+  const hum = weather.humidity;
+  const pre = weather.pressure_mb;
+  createDOM.card(time, Photo, 'weather-icon', temp_c, '°C', hum, pre);
+})
+
 console.log(forecast_json.forecastday[0].hour)
 console.log(forecast_condition)
-for (let i = 8; i > 0; i--) {
-  createDOM.card('11 April', Photo, 'weather-icon', mintemp_c, maxtemp_c, '86%', '1013hPa');
-}
-
-
-// forecast_json.list.forEach(forecast => {
-//   const date = weatherTools.dateConverterUTC(forecast.dt);
-//   console.log(format(date, "dd MMM HH:mm"))
-// })
-
 
 const searchCity = () => {
   const input = document.getElementById('search-city');
@@ -78,7 +75,6 @@ const searchCity = () => {
     }
   })
 }
-
 
 let units = 'metric';
 const changeButtonClasses = (button, otherBTNClass) => {

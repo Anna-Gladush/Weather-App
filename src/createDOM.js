@@ -53,14 +53,14 @@ const createDOM = (() => {
     createP(dew, `${dewpoint}${temp_word}`);
     createIMG(illustration, girl, 'girl');
   }
-  const card = (date, img, name, temp_min, temp_max, hum, pressure) => {
+  const card = (date, img, name, temp, temp_word, hum, pressure) => {
     const forecast_div = document.querySelector('.forecast');
     const card = createDiv(forecast_div, 'card');
     createP(card, date);
     createIMG(card, img, name);
-    createP(card, `${temp_min}°C / ${temp_max}°C`);
-    createP(card, hum);
-    createP(card, pressure);
+    createP(card, `${temp}${temp_word}`);
+    createP(card, `${hum}%`);
+    createP(card, `${pressure} hPa`);
   }
   const dateSwitch = (now, tomorrow_day, after_day) => {
     const div = document.querySelector('.weather'); 

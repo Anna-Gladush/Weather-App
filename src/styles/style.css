@@ -148,9 +148,11 @@ sup {
 .forecast {
   display: grid;
   /* width: 90vw; */
-  grid-template-columns: repeat(auto-fit, 200px);
+  grid-template-columns: repeat(24, 230px);
+  column-gap: 20px;
   justify-content: space-between;  
-  padding-right: 20px;
+  margin-right: 20px;
+  overflow-x: scroll;
 }
 .card {
   display: flex;
