@@ -2,6 +2,18 @@ import "./styles/style.css";
 import { format } from "date-fns";
 import { createDOM } from "./createDOM.js";
 import { forecast } from "./weather-api.js";
+
+// function importAll(r) {
+//   let images = {};
+//   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+//   return images;
+// }
+
+// const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
+// console.log(images)
+
+
+
 import Photo from './assets/icons/weather/01d.svg';
 import Direct from './assets/icons/direction/se.svg';
 import girl from './assets/illustrations/clear.svg';
@@ -22,7 +34,6 @@ const temp_f = current.temp_f;
 const feelslike_c = current.feelslike_c;
 const feelslike_f = current.feelslike_f;
 const condition = current.condition.text;
-const icon = current.condition.icon;
 
 const wind_mph = current.wind_mph;
 const wind_dir = current.wind_dir;
@@ -51,7 +62,6 @@ const createDateDivs = () => {
   forecastDateSwitch();
 
 }
-
 
 const forecast_condition = (array_num, temp_word) => {
   document.querySelector('.forecast').innerHTML = '';
@@ -139,31 +149,10 @@ createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, ma
 createDateDivs()
 
 forecast_condition(0, '°C');
-// .weather.id = id;
-// .weather.icon = icon;
-// const id = '501'
-// const weatherImages = () => {
-//   if ([800].includes(id)) {
-//     return 'clear sky'
-//   } else if ([801].includes(id)) {
-//     return 'few clouds'
-//   } else if ([802].includes(id)) {
-//     return 'scattered clouds'
-//   } else if ([803, 804].includes(id)) {
-//     return 'broken clouds'
-//   } else if ([300, 301, 302, 310, 311, 312, 313, 314, 321, 520, 521, 522, 531].includes(id)) {
-//     return 'shower rain'
-//   } else if ([500, 501, 502, 503, 504].includes(id)) {
-//     return 'rain'
-//   } else if ([200, 201, 202,210, 211, 212, 221, 230, 231, 232].includes(id)) {
-//     return 'thunderstorm'
-//   } else if ([511, 600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622].includes(id)) {
-//     return 'snow'
-//   } else if ([701, 711, 721, 731, 741, 751, 761, 762, 771, 781].includes(id)) {
-//     return 'mist'
-//   }
-// }
+
+
+const weather_code = current.condition.code;
+const is_day = current.is_day
+
     
 // setInterval(() => {const paragraph = <p>Current time: {dayjs().format('HH:mm:ss')}</p>; root.render(paragraph);})
-
-// import Photos from './assets/icons/weather/';
