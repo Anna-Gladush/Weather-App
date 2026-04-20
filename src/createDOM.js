@@ -1,4 +1,4 @@
-
+// import { loadImages } from './index.js';
 const createDOM = (() => {
   const createDiv = (parent, class_name) => {
     const div = document.createElement('div');
@@ -19,7 +19,7 @@ const createDOM = (() => {
     parent.appendChild(img);
     return img;
   }
-  const createCurrentWeatherDOM = (temp_word, temperature, weather_icon = Photo, condition, temp_min, temp_max, temperature_feels, humidity, pressure, visibility, wind_dir, Direct, wind_mph,  uv, dewpoint, girl) => {
+  const createCurrentWeatherDOM = (temp_word, temperature, weather_icon, condition, temp_min, temp_max, temperature_feels, humidity, pressure, visibility, wind_dir, direction, wind_mph,  uv, dewpoint, girl) => {
     const day = document.querySelector('.day');
     const illustration = document.querySelector('.illustration');
 
@@ -27,7 +27,7 @@ const createDOM = (() => {
     const info = createDiv(day, 'day-info');
     const info_left = createDiv(info, 'info-left');
     const temp = createP(info_left, `<span>${temperature}</span><sup>${temp_word}</sup>`);
-    createIMG(info_left, weather_icon, 'weather-icon');
+    info_left.appendChild(weather_icon);
     const info_right = createDiv(info, 'info-right');
     const weather_name = createP(info_right, condition);
     const weather_temp = createP(info_right, `${temp_min}${temp_word} / ${temp_max}${temp_word}`);
@@ -43,7 +43,7 @@ const createDOM = (() => {
     createP(vis, `${visibility} km`);
     const wind = createDiv(day, 'wind');
     createP(wind, wind_dir);
-    createIMG(wind, Direct, 'wind-direction')
+    wind.appendChild(direction);
     createP(wind, `${wind_mph} m/s`);
     const uv_div = createDiv(day, 'uv');
     createP(uv_div, 'UV');
@@ -51,13 +51,13 @@ const createDOM = (() => {
     const dew = createDiv(day, 'dew');
     createP(dew, 'Dewpoint');
     createP(dew, `${dewpoint}${temp_word}`);
-    createIMG(illustration, girl, 'girl');
+    illustration.appendChild(girl);
   }
-  const card = (date, img, name, temp, temp_word, hum, pressure) => {
+  const card = (date, img, temp, temp_word, hum, pressure) => {
     const forecast_div = document.querySelector('.forecast');
     const card = createDiv(forecast_div, 'card');
     createP(card, date);
-    createIMG(card, img, name);
+    card.appendChild(img);
     createP(card, `${temp}${temp_word}`);
     createP(card, `${hum}%`);
     createP(card, `${pressure} hPa`);

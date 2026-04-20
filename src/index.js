@@ -2,33 +2,51 @@ import "./styles/style.css";
 import { format } from "date-fns";
 import { createDOM } from "./createDOM.js";
 import { forecast } from "./weather-api.js";
-
-// function importAll(r) {
-//   let images = {};
-//   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-//   return images;
-// }
-
-// const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
-// console.log(images)
-
-
-
-import Photo from './assets/icons/weather/01d.svg';
-import Direct from './assets/icons/direction/se.svg';
-import girl from './assets/illustrations/clear.svg';
+import { getImages } from "./importImages.js"
+// I HATE WEBPACK
+// Importing images dynamically
+async function loadImages(type, name) {
+  let src;
+  if (type == 'weather') {
+    const module = await import(`./assets/icons/weather/${name}.svg`);
+    src = module.default;
+  } else if  (type == 'direction') {
+    const module = await import(`./assets/icons/direction/${name}.svg`);
+    src = module.default;
+  } else if  (type == 'background') {
+    const module = await import(`./assets/images/${name}.jpg`);
+    src = module.default;
+    document.body.style.backgroundImage = `url(${src})`
+    return;
+  } else if  (type == 'illustration') {
+    const module = await import(`./assets/illustrations/${name}.svg`);
+    src = module.default;
+  } 
+  const img = document.createElement('IMG');
+  img.src = src;
+  return img
+}
 
 const div = document.querySelector('.weather');
-// Variables
 
+// JSON
 const json = forecast;
+const current = json.current;
+const forecast_json = json.forecast;
+// Background
+const weather_code = current.condition.code;
+const is_day = current.is_day;
 
+const code = getImages.weatherIcon(weather_code, is_day)
+const imagesPaths = getImages.weatherBackgroundAndIllustration(code, is_day)
+// console.log(imagesPaths.icon, imagesPaths.background)
+loadImages('background', imagesPaths.background)
+
+// Variables
 const location = `${json.location.name}, ${json.location.region}`;
 document.getElementById('city').textContent = location;
 
-const current = json.current;
-const forecast_json = json.forecast;
-
+// CURRENT
 const temp_c = current.temp_c;
 const temp_f = current.temp_f;
 const feelslike_c = current.feelslike_c;
@@ -60,22 +78,21 @@ const createDateDivs = () => {
     id ++;
   })
   forecastDateSwitch();
-
 }
 
 const forecast_condition = (array_num, temp_word) => {
   document.querySelector('.forecast').innerHTML = '';
   forecast_json.forecastday[array_num].hour.forEach(weather => {
-  console.log(weather.condition);
+  // console.log(weather.condition);
   const time = format(new Date(weather.time), 'HH:mm');
   const hum = weather.humidity;
   const pre = weather.pressure_mb;
   if (temp_word === '°C') {
     let temperature = weather.temp_c;
-    createDOM.card(time, Photo, 'weather-icon', temperature, temp_word, hum, pre);
+    // createDOM.card(time, Photo, temperature, temp_word, hum, pre);
   } else if (temp_word === '°F') {
     let temperature = weather.temp_f;
-    createDOM.card(time, Photo, 'weather-icon', temperature, temp_word, hum, pre);
+    // createDOM.card(time, Photo, temperature, temp_word, hum, pre);
   }
 })}
 
@@ -111,14 +128,14 @@ const unitsConverter = () => {
       units = 'metric';
       
       div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
-      createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
+      // createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
       forecast_condition(0, '°C')
     } else if (button.classList.contains('imperial')) {
       changeButtonClasses(button, 'metric');
       units = 'imperial';
 
       div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
-      createDOM.createCurrentWeatherDOM('°F', temp_f, Photo, condition, mintemp_f, maxtemp_f, feelslike_f, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_f, girl);     
+      // createDOM.createCurrentWeatherDOM('°F', temp_f, Photo, condition, mintemp_f, maxtemp_f, feelslike_f, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_f, girl);     
       forecast_condition(0, '°F')
     }
     createDateDivs()
@@ -145,14 +162,20 @@ const forecastDateSwitch = () => {
 
 unitsConverter();
 searchCity();
-createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
+
+
+// const imagesPaths = getImages.weatherBackgroundAndIllustration(code, is_day)
+// console.log(imagesPaths.icon, imagesPaths.background)
+const weather_icon = loadImages('weather', imagesPaths.icon)
+const girl_illustration = loadImages('weather', imagesPaths.illustration)
+const direction_icon = loadImages('direction', getImages.windDirection(wind_dir))
+createDOM.createCurrentWeatherDOM('°C', temp_c, weather_icon, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, direction_icon, wind_mph, uv, dewpoint_c, girl_illustration);
 createDateDivs()
 
 forecast_condition(0, '°C');
 
 
-const weather_code = current.condition.code;
-const is_day = current.is_day
+
 
     
 // setInterval(() => {const paragraph = <p>Current time: {dayjs().format('HH:mm:ss')}</p>; root.render(paragraph);})
