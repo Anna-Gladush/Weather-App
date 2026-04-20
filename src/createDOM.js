@@ -1,5 +1,7 @@
-// import { loadImages } from './index.js';
+import { loadImages } from "./asyncLoadImage.js";
+
 const createDOM = (() => {
+  let i = 0;
   const createDiv = (parent, class_name) => {
     const div = document.createElement('div');
     div.className = class_name;
@@ -27,7 +29,8 @@ const createDOM = (() => {
     const info = createDiv(day, 'day-info');
     const info_left = createDiv(info, 'info-left');
     const temp = createP(info_left, `<span>${temperature}</span><sup>${temp_word}</sup>`);
-    info_left.appendChild(weather_icon);
+    loadImages('weather', weather_icon, document.querySelector('.info-left'))
+    // info_left.appendChild(weather_icon);
     const info_right = createDiv(info, 'info-right');
     const weather_name = createP(info_right, condition);
     const weather_temp = createP(info_right, `${temp_min}${temp_word} / ${temp_max}${temp_word}`);
@@ -43,7 +46,8 @@ const createDOM = (() => {
     createP(vis, `${visibility} km`);
     const wind = createDiv(day, 'wind');
     createP(wind, wind_dir);
-    wind.appendChild(direction);
+    loadImages('direction', direction, document.querySelector('.wind'));
+    // wind.appendChild(direction);
     createP(wind, `${wind_mph} m/s`);
     const uv_div = createDiv(day, 'uv');
     createP(uv_div, 'UV');
@@ -51,17 +55,20 @@ const createDOM = (() => {
     const dew = createDiv(day, 'dew');
     createP(dew, 'Dewpoint');
     createP(dew, `${dewpoint}${temp_word}`);
-    illustration.appendChild(girl);
+    loadImages('illustration', girl, document.querySelector('.illustration'));
+    // illustration.appendChild(girl);
   }
-  const card = (date, img, temp, temp_word, hum, pressure) => {
+  const card = (date, imagesPaths, temp, temp_word, hum, pressure) => {
+    i++;
     const forecast_div = document.querySelector('.forecast');
-    const card = createDiv(forecast_div, 'card');
+    const card = createDiv(forecast_div, `card card-${i}`);
     createP(card, date);
-    card.appendChild(img);
+    loadImages('weather', imagesPaths, document.querySelector(`.card-${i}`))
     createP(card, `${temp}${temp_word}`);
     createP(card, `${hum}%`);
     createP(card, `${pressure} hPa`);
   }
+
   const dateSwitch = (day, num) => {
     const div = document.querySelector('.date-switch'); 
     const current = createDiv(div, 'switch');

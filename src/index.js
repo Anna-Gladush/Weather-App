@@ -3,29 +3,8 @@ import { format } from "date-fns";
 import { createDOM } from "./createDOM.js";
 import { forecast } from "./weather-api.js";
 import { getImages } from "./importImages.js"
+import { loadImages } from "./asyncLoadImage.js";
 // I HATE WEBPACK
-// Importing images dynamically
-async function loadImages(type, name) {
-  let src;
-  if (type == 'weather') {
-    const module = await import(`./assets/icons/weather/${name}.svg`);
-    src = module.default;
-  } else if  (type == 'direction') {
-    const module = await import(`./assets/icons/direction/${name}.svg`);
-    src = module.default;
-  } else if  (type == 'background') {
-    const module = await import(`./assets/images/${name}.jpg`);
-    src = module.default;
-    document.body.style.backgroundImage = `url(${src})`
-    return;
-  } else if  (type == 'illustration') {
-    const module = await import(`./assets/illustrations/${name}.svg`);
-    src = module.default;
-  } 
-  const img = document.createElement('IMG');
-  img.src = src;
-  return img
-}
 
 const div = document.querySelector('.weather');
 
@@ -83,16 +62,20 @@ const createDateDivs = () => {
 const forecast_condition = (array_num, temp_word) => {
   document.querySelector('.forecast').innerHTML = '';
   forecast_json.forecastday[array_num].hour.forEach(weather => {
-  // console.log(weather.condition);
+  const day_code = weather.condition.code;
+  const day = weather.is_day;
+  const code = getImages.weatherIcon(day_code, day)
+  const imagesPaths = getImages.weatherBackgroundAndIllustration(code, day)
+  console.log(imagesPaths.icon)
   const time = format(new Date(weather.time), 'HH:mm');
   const hum = weather.humidity;
   const pre = weather.pressure_mb;
   if (temp_word === '°C') {
     let temperature = weather.temp_c;
-    // createDOM.card(time, Photo, temperature, temp_word, hum, pre);
+    createDOM.card(time, imagesPaths.icon, temperature, temp_word, hum, pre);
   } else if (temp_word === '°F') {
     let temperature = weather.temp_f;
-    // createDOM.card(time, Photo, temperature, temp_word, hum, pre);
+    createDOM.card(time, imagesPaths, temperature, temp_word, hum, pre);
   }
 })}
 
@@ -166,13 +149,20 @@ searchCity();
 
 // const imagesPaths = getImages.weatherBackgroundAndIllustration(code, is_day)
 // console.log(imagesPaths.icon, imagesPaths.background)
-const weather_icon = loadImages('weather', imagesPaths.icon)
-const girl_illustration = loadImages('weather', imagesPaths.illustration)
-const direction_icon = loadImages('direction', getImages.windDirection(wind_dir))
-createDOM.createCurrentWeatherDOM('°C', temp_c, weather_icon, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, direction_icon, wind_mph, uv, dewpoint_c, girl_illustration);
-createDateDivs()
 
-forecast_condition(0, '°C');
+async function createCurrentWeather() {
+  console.log(imagesPaths.illustration)
+
+  const weather_icon = imagesPaths.icon;
+  const girl_illustration = imagesPaths.illustration;
+  const direction_icon = getImages.windDirection(wind_dir);
+  createDOM.createCurrentWeatherDOM('°C', temp_c, weather_icon, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, direction_icon, wind_mph, uv, dewpoint_c, girl_illustration);
+  createDateDivs()
+  forecast_condition(0, '°C');
+
+}
+createCurrentWeather()
+
 
 
 
