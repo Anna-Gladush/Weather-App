@@ -106,12 +106,29 @@ main {
   /* background-color: var(--compass-color); */
   display: flex;
   justify-content: space-between;
+  align-items: end;
 }
 .day-info,
 .info-left {
   display: flex;
   width: 500px;
 }
+.info-left {
+  width: 50vw;
+}
+.info-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  gap: 20px;
+}
+.info-bottom div {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  height: 80px;
+  border-radius: 10px;
+  font-size: 0.8=9em;
+}
+
 span {
   font-size: 3em;
 }
@@ -123,7 +140,7 @@ sup {
   font-size: 0.95em;
 }
 .info-right {
-  width: 20vw;
+  width: 50vw;
   display: flex;
   flex-direction: column;
 }
@@ -131,10 +148,16 @@ sup {
 .card img,
 .wind-desc img {
   width: 50px;
-  height: auto;
+  height: 50px;
+}
+.info-left img{
+  height: 100px
 }
 .wind-desc {
   display: flex;
+}
+.illustration {
+  height: 350px;
 }
 .illustration img {
   height: 350px;
@@ -146,9 +169,11 @@ sup {
 }
 .date-switch {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  color: #6d7a76;
+
 }
 .switch {
   text-align: center;
@@ -156,13 +181,13 @@ sup {
   padding: 10px;
   background: rgba(255, 255, 255, 0.35);
   border-radius: 3vh;
+  margin: 15px;
 }
 .current {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 1);
 }
 .forecast {
   display: grid;
-  /* width: 90vw; */
   grid-template-columns: repeat(24, 230px);
   column-gap: 20px;
   justify-content: space-between;  
@@ -176,7 +201,8 @@ sup {
   align-items: center;
   text-align: center;
   border-radius: 3vh;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.75);
+  color: #6d7a76;
   font-size: 1em;
-  height: 20vh;
+  height: 26vh;
 }

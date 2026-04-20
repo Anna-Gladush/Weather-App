@@ -18,7 +18,6 @@ const is_day = current.is_day;
 
 const code = getImages.weatherIcon(weather_code, is_day)
 const imagesPaths = getImages.weatherBackgroundAndIllustration(code, is_day)
-// console.log(imagesPaths.icon, imagesPaths.background)
 loadImages('background', imagesPaths.background)
 
 // Variables
@@ -66,7 +65,6 @@ const forecast_condition = (array_num, temp_word) => {
   const day = weather.is_day;
   const code = getImages.weatherIcon(day_code, day)
   const imagesPaths = getImages.weatherBackgroundAndIllustration(code, day)
-  console.log(imagesPaths.icon)
   const time = format(new Date(weather.time), 'HH:mm');
   const hum = weather.humidity;
   const pre = weather.pressure_mb;
@@ -75,11 +73,23 @@ const forecast_condition = (array_num, temp_word) => {
     createDOM.card(time, imagesPaths.icon, temperature, temp_word, hum, pre);
   } else if (temp_word === '°F') {
     let temperature = weather.temp_f;
-    createDOM.card(time, imagesPaths, temperature, temp_word, hum, pre);
+    createDOM.card(time, imagesPaths.icon, temperature, temp_word, hum, pre);
   }
 })}
 
-// console.log(forecast_json.forecastday[0].hour)
+async function createCurrentWeather(temp_word) {
+  div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
+  const weather_icon = imagesPaths.icon;
+  const girl_illustration = imagesPaths.illustration;
+  const direction_icon = getImages.windDirection(wind_dir);
+  if (temp_word === '°C'){
+  createDOM.createCurrentWeatherDOM('°C', temp_c, weather_icon, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, direction_icon, wind_mph, uv, dewpoint_c, girl_illustration);
+  } else if (temp_word === '°F') {
+    createDOM.createCurrentWeatherDOM('°F', temp_f, weather_icon, condition, mintemp_f, maxtemp_f, feelslike_f, humidity, pressure, visibility, wind_dir, direction_icon, wind_mph, uv, dewpoint_f, girl_illustration);
+  }
+  createDateDivs()
+  forecast_condition(0, temp_word);
+}
 
 const searchCity = () => {
   const input = document.getElementById('search-city');
@@ -91,7 +101,6 @@ const searchCity = () => {
   })
 }
 
-let units = 'metric';
 const changeButtonClasses = (button, otherBTNClass) => {
   button.classList.add('active');
   button.classList.remove('not-active');
@@ -101,6 +110,7 @@ const changeButtonClasses = (button, otherBTNClass) => {
 }
 
 const unitsConverter = () => {
+  let units = 'metric';
   const buttons = document.querySelectorAll('.unit');
   buttons.forEach(button => button.addEventListener('click', () => {
     if (button.classList.contains('active')) {
@@ -111,17 +121,14 @@ const unitsConverter = () => {
       units = 'metric';
       
       div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
-      // createDOM.createCurrentWeatherDOM('°C', temp_c, Photo, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_c, girl);
-      forecast_condition(0, '°C')
+      createCurrentWeather('°C')
     } else if (button.classList.contains('imperial')) {
       changeButtonClasses(button, 'metric');
       units = 'imperial';
 
       div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
-      // createDOM.createCurrentWeatherDOM('°F', temp_f, Photo, condition, mintemp_f, maxtemp_f, feelslike_f, humidity, pressure, visibility, wind_dir, Direct, wind_mph, uv, dewpoint_f, girl);     
-      forecast_condition(0, '°F')
+      createCurrentWeather('°F')
     }
-    createDateDivs()
   }))
 }
 
@@ -146,26 +153,4 @@ const forecastDateSwitch = () => {
 unitsConverter();
 searchCity();
 
-
-// const imagesPaths = getImages.weatherBackgroundAndIllustration(code, is_day)
-// console.log(imagesPaths.icon, imagesPaths.background)
-
-async function createCurrentWeather() {
-  console.log(imagesPaths.illustration)
-
-  const weather_icon = imagesPaths.icon;
-  const girl_illustration = imagesPaths.illustration;
-  const direction_icon = getImages.windDirection(wind_dir);
-  createDOM.createCurrentWeatherDOM('°C', temp_c, weather_icon, condition, mintemp_c, maxtemp_c, feelslike_c, humidity, pressure, visibility, wind_dir, direction_icon, wind_mph, uv, dewpoint_c, girl_illustration);
-  createDateDivs()
-  forecast_condition(0, '°C');
-
-}
-createCurrentWeather()
-
-
-
-
-
-    
-// setInterval(() => {const paragraph = <p>Current time: {dayjs().format('HH:mm:ss')}</p>; root.render(paragraph);})
+createCurrentWeather('°C')
