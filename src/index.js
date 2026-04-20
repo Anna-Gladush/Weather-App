@@ -1,7 +1,7 @@
 import "./styles/style.css";
 import { format } from "date-fns";
 import { createDOM } from "./createDOM.js";
-import { forecast } from "./weather-api.js";
+import { forecast, getWeatherData } from "./weather-api.js";
 import { getImages } from "./importImages.js"
 import { loadImages } from "./asyncLoadImage.js";
 // I HATE WEBPACK
@@ -9,9 +9,13 @@ import { loadImages } from "./asyncLoadImage.js";
 const div = document.querySelector('.weather');
 
 // JSON
-const json = forecast;
+let city = 'Honolulu';
+
+const json = await getWeatherData(city);
 const current = json.current;
 const forecast_json = json.forecast;
+console.log(json)
+
 // Background
 const weather_code = current.condition.code;
 const is_day = current.is_day;

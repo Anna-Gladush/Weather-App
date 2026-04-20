@@ -1,12 +1,7 @@
 const api = '5a4f775d97004809801123746261604';
-let city = 'Honolulu';
-// let dt = '2026-04-17'
-
-// const current_url = `http://api.weatherapi.com/v1/current.json?key=${key}&q=${city}&aqi=yes`;
-// const astro_url = `http://api.weatherapi.com/v1/astronomy.json?key=${api}&q=${city}&dt=${dt}`;
 
 // Forecast
-async function getWeatherData() {
+async function getWeatherData(city) {
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${api}&q=${city}&days=3&aqi=no&alerts=no`;
 
   try {
@@ -16,6 +11,7 @@ async function getWeatherData() {
     }
     const result = await response.json();
     return result;
+
   } catch (error) {
     console.error(error.message);
   }
@@ -3371,4 +3367,4 @@ const forecast = {
     }
 }
 
-export {forecast}
+export { forecast, getWeatherData }
