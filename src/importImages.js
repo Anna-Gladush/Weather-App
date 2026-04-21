@@ -56,7 +56,7 @@ const getImages = (() => {
       illustration = (code === '01d') ? 'clear' : 'cold' ;
     } else if (code === '02d' || code === '02n' || code === '03d' || code === '03n' || code === '04d' || code === '04n' || code === '50') {
       // cloudy or misty
-      background = day === 1 ? 'cloudy-engin-akyurt-3ihnKT5apmg-unsplash' : './assets/images/ahmad-pishnamazi-6_sz4q0P4rk-unsplash' ;
+      background = day === 1 ? 'cloudy-engin-akyurt-3ihnKT5apmg-unsplash' : 'ahmad-pishnamazi-6_sz4q0P4rk-unsplash';
       illustration = 'wind';
     }
     return {icon, background, illustration}

@@ -2,7 +2,6 @@
 async function loadImages(type, name, parent = '') {
   let src;
   const div = parent; 
-  console.log(div)
   if (type == 'weather') {
     const module = await import(`./assets/icons/weather/${name}.svg`);
     src = module.default;
