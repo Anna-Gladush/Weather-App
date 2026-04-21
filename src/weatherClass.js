@@ -18,7 +18,6 @@ class Weather {
   }
   static async createForecast(city){
     const json = await getWeatherData(city);
-    console.log(json)
     return new Weather(json);
   } 
 
@@ -42,6 +41,7 @@ class Weather {
   })}
 
   createDateDivs() {
+    this.id = 0;
     this.forecastday.forEach(day => {
       createDOM.dateSwitch(format(new Date(day.date), "d MMMM"), this.id);
       this.id ++;
@@ -51,7 +51,6 @@ class Weather {
 
   async createCurrentWeather(temp_word) {
     const { temp_c, temp_f, feelslike_c, feelslike_f, condition, wind_mph, wind_dir, pressure_mb, humidity, dewpoint_c, dewpoint_f, vis_km, uv} = this.current;
-    console.log(this.forecastday[0])
     const {maxtemp_c, maxtemp_f, mintemp_c, mintemp_f} = this.forecastday[0].day;
     const location = `${this.json.location.name}`;
     document.getElementById('city').textContent = location;
@@ -84,7 +83,12 @@ class Weather {
     const div = document.querySelector('.weather');
     let units = 'metric';
     const buttons = document.querySelectorAll('.unit');
-    buttons.forEach(button => button.addEventListener('click', () => {
+    // Delete previous eventListeners = fixes the problem: when clicking on buttons the previous json was used;
+    buttons.forEach(button => {
+      const new_btn = button.cloneNode(true);
+      new_btn.replaceWith(fresh);
+    });
+    document.querySelectorAll('.unit').forEach(button => button.addEventListener('click', () => {
       if (button.classList.contains('active')) {
         return
       }
@@ -93,10 +97,12 @@ class Weather {
         units = 'metric';
         
         div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
+        console.log(this.current)
         this.createCurrentWeather('°C')
       } else if (button.classList.contains('imperial')) {
         this.changeButtonClasses(button, 'metric');
         units = 'imperial';
+        console.log(this.current)
 
         div.innerHTML = '<div class="today"><div class="day"></div><div class="illustration"></div></div><div class="date-switch"></div><div class="forecast"></div>';
         this.createCurrentWeather('°F')

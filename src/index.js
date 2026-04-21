@@ -1,6 +1,12 @@
 import "./styles/style.css";
 import { Weather } from "./weatherClass.js";
 
+async function init() {
+  let city = 'Istanbul';
+  let weather;
+  weather = await Weather.createForecast(city);
+  weather.createCurrentWeather('°C');
+}
 async function search(e) {
   const input = document.getElementById('search-city');
   const button = document.querySelector('.unit.active');
@@ -17,9 +23,6 @@ async function searchCityInput() {
   input.addEventListener('keydown', (e) => {search(e)})}
 
 // JSON
-let city = 'New York';
-let weather;
-weather = await Weather.createForecast(city);
-weather.createCurrentWeather('°C');
 
+init()
 searchCityInput()
