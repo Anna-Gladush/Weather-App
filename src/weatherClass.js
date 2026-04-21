@@ -86,7 +86,7 @@ class Weather {
     // Delete previous eventListeners = fixes the problem: when clicking on buttons the previous json was used;
     buttons.forEach(button => {
       const new_btn = button.cloneNode(true);
-      new_btn.replaceWith(fresh);
+      button.replaceWith(new_btn);
     });
     document.querySelectorAll('.unit').forEach(button => button.addEventListener('click', () => {
       if (button.classList.contains('active')) {
