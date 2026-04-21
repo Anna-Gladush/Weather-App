@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <link rel="shortcut icon" href="assets/0a26dd3aeff15ac9c3b7.ico" type="image/x-icon">
+  <title>Weather App</title>
+<script defer src="main.js"></script></head>
+<body>
+  <header> 
+    <div class="city">
+      <img src="assets/98c662197a62241d32b7.svg" alt="map-icon" width="25px">
+      <p id="city"></p>
+    </div>
+    <div class="button-metric">
+      <button class="unit metric active">°C</button>
+      <button class="unit imperial not-active">°F</button>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="Search City" id="search-city">
+      <button class="submit"></button>
+    </div>
+  </header>
+  <main>
+    <div class="weather">
+      <div class="today">
+        <div class="day">
+        </div>
+        <div class="illustration"></div>
+      </div>
+      <div class="date-switch"></div>
+      <div class="forecast"></div>
+    </div>
+  </main>
+</body>
+</html>
