@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Spinner from './components/Spinner'
 import { useEffect, useState } from 'react';
 import CurrentWeatherForecast from './components/currentWeather'
+import Card from './components/forecast'
 import weather_data from './data/weather-data.json'
 
 // const WEATHER_API = import.meta.env.WEATHER_API;
@@ -15,6 +16,7 @@ const App = () => {
   const [currentWeather, setCurrentWeather] = useState(weather_data.current);
   const [forecast, setForecast] = useState(weather_data.forecast);
   const [tempword, setTempword] = useState('C')
+  const [date, setDate] = useState(1)
   // const [currentForecast, setCurrentForecast] = useState([]);
   const [inputCity, setInputCity] = useState('Honolulu')
   const [isLoading, setIsLoading] = useState(false);
@@ -80,23 +82,38 @@ const App = () => {
     <>
     <Header city={inputCity}/>
       <main>
-      
-      <CurrentWeatherForecast
-      code={currentWeather.condition.code} 
-      temp_word={tempword} 
-      temp={tempword === 'C' ? currentWeather.temp_c :  currentWeather.temp_f}
-      min={tempword === 'C' ? forecast.forecastday[0].day.mintemp_c : forecast.forecastday[0].day.mintemp_f}
-      max={tempword === 'C' ? forecast.forecastday[0].day.maxtemp_c : forecast.forecastday[0].day.maxtemp_f}
-      condition={currentWeather.condition.text}
-      feelslike={tempword === 'C' ? currentWeather.feelslike_c :  currentWeather.feelslike_f}
-      humidity={currentWeather.humidity}
-      pressure={currentWeather.pressure_mb}
-      visibility={currentWeather.vis_km}
-      dir={currentWeather.wind_dir}
-      wind={currentWeather.wind_kph}
-      uv={currentWeather.uv}
-      dewpoint={tempword === 'C' ? currentWeather.dewpoint_c :  currentWeather.dewpoint_f}/>
-      {/* // currentWeather.map(item => console.log(item))} */}
+        <CurrentWeatherForecast
+          code={currentWeather.condition.code} 
+          temp_word={tempword} 
+          temp={tempword === 'C' ? currentWeather.temp_c :  currentWeather.temp_f}
+          min={tempword === 'C' ? forecast.forecastday[0].day.mintemp_c : forecast.forecastday[0].day.mintemp_f}
+          max={tempword === 'C' ? forecast.forecastday[0].day.maxtemp_c : forecast.forecastday[0].day.maxtemp_f}
+          condition={currentWeather.condition.text}
+          feelslike={tempword === 'C' ? currentWeather.feelslike_c :  currentWeather.feelslike_f}
+          humidity={currentWeather.humidity}
+          pressure={currentWeather.pressure_mb}
+          visibility={currentWeather.vis_km}
+          dir={currentWeather.wind_dir}
+          wind={currentWeather.wind_kph}
+          uv={currentWeather.uv}
+          dewpoint={tempword === 'C' ? currentWeather.dewpoint_c :  currentWeather.dewpoint_f}
+        />
+        
+        <div className="forecast">
+          {forecast.forecastday[date].hour.map(
+            hour => {
+              return (
+                <Card 
+                date={hour.time} 
+                temp={tempword === 'C' ? hour.temp_c : hour.temp_f} 
+                temp_word={tempword}
+                humidity={hour.humidity}
+                pressure={hour.pressure_mb}
+                />
+              )
+            }
+        )}
+        </div>
       </main>
     </>
   )
