@@ -2,6 +2,7 @@ const CurrentWeatherForecast = ({ code, temp_word, temp, min, max, condition, fe
   
   return (
     <>
+    <div className="today">
       <div className="day">
         <p>CURRENT WEATHER {code}</p>
         <div className="day-info">
@@ -46,6 +47,7 @@ const CurrentWeatherForecast = ({ code, temp_word, temp, min, max, condition, fe
       <div className="illustration">
         {/* <img alt="" src=""> */}
       </div>
+    </div>
     </>
   )
 }

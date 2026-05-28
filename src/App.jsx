@@ -1,24 +1,28 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/set-state-in-effect */
-import Header from './components/Header';
+import { format } from 'date-fns'
 import Spinner from './components/Spinner'
 import { useEffect, useState } from 'react';
-import CurrentWeatherForecast from './components/currentWeather'
-import Card from './components/forecast'
+import CurrentWeatherForecast from './components/CurrentWeather'
+import Card from './components/Forecast'
 import weather_data from './data/weather-data.json'
 
+import setImage from './setBackgroundImage'
 // const WEATHER_API = import.meta.env.WEATHER_API;
 // const WEATHER_API = process.env.WEATHER_API;
 const API_BASE_URL = 'https://api.weatherapi.com/v1';
 
 
 const App = () => {
+  // const [bgImage, setBgImage] = useState('#ffffff');
+
+  const [currentTime, setCurrentTime] = useState(new Date())
   const [currentWeather, setCurrentWeather] = useState(weather_data.current);
   const [forecast, setForecast] = useState(weather_data.forecast);
-  const [tempword, setTempword] = useState('C')
-  const [date, setDate] = useState(1)
+  const [tempword, setTempword] = useState('C');
+  const [date, setDate] = useState(1);
   // const [currentForecast, setCurrentForecast] = useState([]);
-  const [inputCity, setInputCity] = useState('Honolulu')
+  const [inputCity, setInputCity] = useState('Honolulu');
   const [isLoading, setIsLoading] = useState(false);
   // const [errorMessage, setErrorMessage] = useState('');
 
@@ -72,33 +76,71 @@ const App = () => {
     //   }
     // }
   }
+  const handleSearch = () => {
 
+  }
+  const handleUnitChange = () => {
+
+  }
+  const handleDateChange = () => {
+
+  }
 // useEffect(() => {
 //   getWeatherData(inputCity)
 // }, [inputCity])
 // const min = weather_data.forecast.forecastday[0].day.mintemp_c
 // const max = weather_data.forecast.forecastday[0].day.maxtemp_c
+  useEffect(() => {
+    setInterval(() => setCurrentTime(new Date()), 1000)
+  }, [])
+  setImage({imgPath: 'url(/carrie-borden-LW_o-S1fmFk-unsplash.png)'})
+
   return (
     <>
-    <Header city={inputCity}/>
+      <header>
+        <div className="city">
+          <img src="/icons/map.svg" alt="map" width={25}/>
+          <p id="city">{inputCity}</p>
+        </div>
+        <div className="button-metric">
+          <button className="unit metric active">°C</button>
+          <button className="unit imperial not-active">°F</button>
+        </div>
+        <p>{format(currentTime, 'HH:mm')}</p>
+        <div className="search">
+          <input type="text" placeholder="Search City" id="search-city"/>
+          <button className="submit"></button>
+        </div>
+      </header>
       <main>
-        <CurrentWeatherForecast
-          code={currentWeather.condition.code} 
-          temp_word={tempword} 
-          temp={tempword === 'C' ? currentWeather.temp_c :  currentWeather.temp_f}
-          min={tempword === 'C' ? forecast.forecastday[0].day.mintemp_c : forecast.forecastday[0].day.mintemp_f}
-          max={tempword === 'C' ? forecast.forecastday[0].day.maxtemp_c : forecast.forecastday[0].day.maxtemp_f}
-          condition={currentWeather.condition.text}
-          feelslike={tempword === 'C' ? currentWeather.feelslike_c :  currentWeather.feelslike_f}
-          humidity={currentWeather.humidity}
-          pressure={currentWeather.pressure_mb}
-          visibility={currentWeather.vis_km}
-          dir={currentWeather.wind_dir}
-          wind={currentWeather.wind_kph}
-          uv={currentWeather.uv}
-          dewpoint={tempword === 'C' ? currentWeather.dewpoint_c :  currentWeather.dewpoint_f}
-        />
+        <div className='weather'>
+          <CurrentWeatherForecast
+            code={currentWeather.condition.code} 
+            temp_word={tempword} 
+            temp={tempword === 'C' ? currentWeather.temp_c :  currentWeather.temp_f}
+            min={tempword === 'C' ? forecast.forecastday[0].day.mintemp_c : forecast.forecastday[0].day.mintemp_f}
+            max={tempword === 'C' ? forecast.forecastday[0].day.maxtemp_c : forecast.forecastday[0].day.maxtemp_f}
+            condition={currentWeather.condition.text}
+            feelslike={tempword === 'C' ? currentWeather.feelslike_c :  currentWeather.feelslike_f}
+            humidity={currentWeather.humidity}
+            pressure={currentWeather.pressure_mb}
+            visibility={currentWeather.vis_km}
+            dir={currentWeather.wind_dir}
+            wind={currentWeather.wind_kph}
+            uv={currentWeather.uv}
+            dewpoint={tempword === 'C' ? currentWeather.dewpoint_c :  currentWeather.dewpoint_f}
+          />
+
         
+        <div className="date-switch">
+          {forecast.forecastday.map(day => {
+            const new_day = format(new Date(day.date), "d MMMM")
+            const current = format(new Date("2026-05-15"), "d MMMM") === new_day ? 'switch current' : 'switch'
+          return (
+            <button className={current} key={day.date}>{new_day}</button>
+          )
+        })}
+        </div>
         <div className="forecast">
           {forecast.forecastday[date].hour.map(
             hour => {
@@ -114,6 +156,7 @@ const App = () => {
             }
         )}
         </div>
+      </div>
       </main>
     </>
   )
