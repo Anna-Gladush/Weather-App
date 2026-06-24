@@ -96,7 +96,7 @@ const App = () => {
   setImage({imgPath: 'url(/carrie-borden-LW_o-S1fmFk-unsplash.png)'})
 
   return (
-    <>
+    <div className='background'>
       <header>
         <div className="city">
           <img src="/icons/map.svg" alt="map" width={25}/>
@@ -158,7 +158,7 @@ const App = () => {
         </div>
       </div>
       </main>
-    </>
+    </div>
   )
 }
 

@@ -5,14 +5,15 @@
   font-family:DejaVu Sans Mono, monospace;
 }
 :root {
-  --accent: #6d7a76;
+  --accent: #37418a;
 }
-body {
+.background {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
-  color: rgb(0, 0, 0);
+  background-image: url(../../public/images/cloudy-engin-akyurt-3ihnKT5apmg-unsplash.jpg);
 }
+
 header {
   /* padding-top: 50px; */
   display: flex;
@@ -70,7 +71,7 @@ input {
 
 }
 .submit {
-  background-image: url(../assets/icons/search.svg);
+  background-image: url(../../public/icons/search.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-color:  transparent;
@@ -111,6 +112,11 @@ main {
   display: flex;
   width: 500px;
 }
+
+.day-info {
+  margin-block: 25px;
+}
+
 .info-left {
   width: 50vw;
 }
@@ -136,7 +142,7 @@ span {
 sup {
   display: inline-block;
   vertical-align: baseline;
-  transform: translateY(-40px);
+  transform: translateY(7px) translateX(-5px);
   line-height: 1;
   font-size: 0.95em;
 }
@@ -183,6 +189,7 @@ sup {
   background: rgba(255, 255, 255, 0.35);
   border-radius: 3vh;
   margin: 15px;
+  border: none;
 }
 .current {
   background: rgba(255, 255, 255, 1);
