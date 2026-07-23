@@ -12,7 +12,7 @@ const CurrentWeatherForecast = ({ code, temp_word, temp, min, max, condition, fe
           </div>
           <div className="info-right">
             <p>{condition}</p>
-            <p>{min}°{temp_word} / ${max}°{temp_word}</p>
+            <p>{min}°{temp_word} / {max}°{temp_word}</p>
             <p>Feels like {feelslike}°{temp_word}</p>
           </div>
         </div>

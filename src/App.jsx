@@ -79,9 +79,11 @@ const App = () => {
   const handleSearch = () => {
 
   }
-  const handleUnitChange = () => {
-
+  
+  const handleUnitChange = (type) => {
+    setTempword(type === 'imperial' ?  'F': 'C');
   }
+
   const handleDateChange = () => {
 
   }
@@ -93,7 +95,6 @@ const App = () => {
   useEffect(() => {
     setInterval(() => setCurrentTime(new Date()), 1000)
   }, [])
-  setImage({imgPath: 'url(/carrie-borden-LW_o-S1fmFk-unsplash.png)'})
 
   return (
     <div className='background'>
@@ -103,8 +104,8 @@ const App = () => {
           <p id="city">{inputCity}</p>
         </div>
         <div className="button-metric">
-          <button className="unit metric active">°C</button>
-          <button className="unit imperial not-active">°F</button>
+          <button className={`unit metric ${tempword === 'C' ? 'active' : 'not-active'}`} onClick={() => handleUnitChange('metric')}>°C</button>
+          <button className={`unit imperial ${tempword === 'F' ? 'active' : 'not-active'}`} onClick={() => handleUnitChange('imperial')}>°F</button>
         </div>
         <p>{format(currentTime, 'HH:mm')}</p>
         <div className="search">
