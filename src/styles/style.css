@@ -22,6 +22,11 @@ header {
   margin-bottom: 5px;
   padding-top: 5px;
 }
+
+button {
+  cursor: pointer;
+}
+
 .button-metric {
   background-color: lightgrey;
   display: flex;
@@ -82,6 +87,7 @@ input {
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   border: none;
+  z-index: 1;
   /* border: 1px solid; */
 }
 main {

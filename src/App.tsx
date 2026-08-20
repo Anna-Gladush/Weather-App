@@ -1,91 +1,88 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/set-state-in-effect */
 import { format } from 'date-fns'
-import Spinner from './components/Spinner'
+// import Spinner from './components/Spinner'
 import { useEffect, useState } from 'react';
 import CurrentWeatherForecast from './components/CurrentWeather'
 import Card from './components/Forecast'
 import weather_data from './data/weather-data.json'
 
-import setImage from './setBackgroundImage'
-// const WEATHER_API = import.meta.env.WEATHER_API;
-// const WEATHER_API = process.env.WEATHER_API;
+// import setImage from './setBackgroundImage'
+const WEATHER_API = import.meta.env.VITE_WEATHER_API;
 const API_BASE_URL = 'https://api.weatherapi.com/v1';
 
 
 const App = () => {
-  // const [bgImage, setBgImage] = useState('#ffffff');
-
   const [currentTime, setCurrentTime] = useState(new Date())
   const [currentWeather, setCurrentWeather] = useState(weather_data.current);
   const [forecast, setForecast] = useState(weather_data.forecast);
   const [tempword, setTempword] = useState('C');
-  const [date, setDate] = useState(1);
+  const [date, setDate] = useState(`${format(new Date(), "d MMMM")}`);
   // const [currentForecast, setCurrentForecast] = useState([]);
   const [inputCity, setInputCity] = useState('Honolulu');
   const [isLoading, setIsLoading] = useState(false);
   // const [errorMessage, setErrorMessage] = useState('');
 
 // https://github.com/weatherapicom/weatherapi-examples/blob/main/javascript/current.js
-  const getWeatherData = async (inputCity) => {
-    setIsLoading(true);
-      const params = new URLSearchParams({
-        key: '5a4f775d97004809801123746261604',
-        q: inputCity,
-        days: 3,
-        aqi: 'yes',
-        alerts: 'yes'
-      })
+  // const getWeatherData = async (inputCity: any) => {
+  //   setIsLoading(true);
+      // const params = new URLSearchParams({
+      //   key: '5a4f775d97004809801123746261604',
+      //   q: inputCity,
+      //   days: 3,
+      //   aqi: 'yes',
+      //   alerts: 'yes'
+      // })
 
-      try {
-        const response = await fetch(`${API_BASE_URL}/forecast.json?${params}`);
-        if (!response.ok) {
-          throw new Error(`Failed fetching weather data. Response status: ${response.status}`)
-        }
-        const data = await response.json();
-        // CHANGE DATA
-        setCurrentWeather(data.current || [])
-        setForecast(data.forecast || [])
-      } catch(error) {
-        console.log(`Error fetching weather data: ${error}`);
-      } finally {
-        setIsLoading(false)
-      }
-}
+//       try {
+//         const response = await fetch(`${API_BASE_URL}/forecast.json?${WEATHER_API}`);
+//         if (!response.ok) {
+//           throw new Error(`Failed fetching weather data. Response status: ${response.status}`)
+//         }
+//         const data = await response.json();
+//         // CHANGE DATA
+//         setCurrentWeather(data.current || [])
+//         setForecast(data.forecast || [])
+//       } catch(error) {
+//         console.log(`Error fetching weather data: ${error}`);
+//       } finally {
+//         setIsLoading(false)
+//       }
+// }
 
 
-  // eslint-disable-next-line no-unused-vars
-  const searchCityInput = async () => {
-    const input = document.getElementById('search-city');
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const city = input.value.trim().toLowerCase();
-        setInputCity(city)
-        input.value = '';
-      }
-    })
-    // async function search(e) {
-    //   const input = document.getElementById('search-city');
-    //   const button = document.querySelector('.unit.active');
-    //   if (e.key === 'Enter') {
-    //     const city = input.value.trim().toLowerCase();
-    //     input.value = '';
-    //     const weather = await Weather.createForecast(city);
-    //     const unit = button.classList.contains('metric') ? '°C' : '°F';
-    //     weather.createCurrentWeather(unit);
-    //   }
-    // }
-  }
-  const handleSearch = () => {
+//   // eslint-disable-next-line no-unused-vars
+//   // const searchCityInput = async () => {
+//   //   const input = document.getElementById('search-city');
+//   //   input.addEventListener('keydown', (e) => {
+//   //     if (e.key === 'Enter') {
+//   //       const city = input.value.trim().toLowerCase();
+//   //       setInputCity(city)
+//   //       input.value = '';
+//   //     }
+//   //   })
+//     // async function search(e) {
+//     //   const input = document.getElementById('search-city');
+//     //   const button = document.querySelector('.unit.active');
+//     //   if (e.key === 'Enter') {
+//     //     const city = input.value.trim().toLowerCase();
+//     //     input.value = '';
+//     //     const weather = await Weather.createForecast(city);
+//     //     const unit = button.classList.contains('metric') ? '°C' : '°F';
+//     //     weather.createCurrentWeather(unit);
+//     //   }
+//     // }
+//   }
+//   const handleSearch = () => {
 
-  }
+//   }
   
-  const handleUnitChange = (type) => {
+  const handleUnitChange = (type: string): void => {
     setTempword(type === 'imperial' ?  'F': 'C');
   }
 
-  const handleDateChange = () => {
-
+  const handleDateChange = (date: string): void => {
+    setDate(date);
   }
 // useEffect(() => {
 //   getWeatherData(inputCity)
@@ -93,7 +90,8 @@ const App = () => {
 // const min = weather_data.forecast.forecastday[0].day.mintemp_c
 // const max = weather_data.forecast.forecastday[0].day.maxtemp_c
   useEffect(() => {
-    setInterval(() => setCurrentTime(new Date()), 1000)
+    const interval = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(interval);
   }, [])
 
   return (
@@ -131,14 +129,12 @@ const App = () => {
             uv={currentWeather.uv}
             dewpoint={tempword === 'C' ? currentWeather.dewpoint_c :  currentWeather.dewpoint_f}
           />
-
-        
         <div className="date-switch">
           {forecast.forecastday.map(day => {
             const new_day = format(new Date(day.date), "d MMMM")
             const current = format(new Date("2026-05-15"), "d MMMM") === new_day ? 'switch current' : 'switch'
           return (
-            <button className={current} key={day.date}>{new_day}</button>
+            <button className={current} key={day.date} onClick={() => handleDateChange(day.date)}>{new_day}</button>
           )
         })}
         </div>
@@ -163,4 +159,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
