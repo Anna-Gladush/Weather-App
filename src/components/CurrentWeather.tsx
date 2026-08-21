@@ -1,5 +1,4 @@
-const CurrentWeatherForecast = ({ code, temp_word, temp, min, max, condition, feelslike, humidity, pressure, visibility, dir, wind, uv, dewpoint}) => {
-  
+const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feelslike, humidity, pressure, visibility, direction, wind_km, uv, dewpoint}) => {
   return (
     <>
     <div className="today">
@@ -7,13 +6,13 @@ const CurrentWeatherForecast = ({ code, temp_word, temp, min, max, condition, fe
         <p>CURRENT WEATHER {code}</p>
         <div className="day-info">
           <div className="info-left">
-            <span>{temp}</span><sup>°{temp_word}</sup>
-            {/* <img className="weather" src="" alt="current weather icon" /> //weather image */}
+            <span>{temp}</span><sup>°{temperatureUnit}</sup>
+            <img className="weather" src="/icons/weather/02n.svg" alt="current weather icon" />
           </div>
           <div className="info-right">
             <p>{condition}</p>
-            <p>{min}°{temp_word} / {max}°{temp_word}</p>
-            <p>Feels like {feelslike}°{temp_word}</p>
+            <p>{min}°...{max}°{temperatureUnit}</p>
+            <p>Feels like {feelslike}°{temperatureUnit}</p>
           </div>
         </div>
         <div className="info-bottom">
@@ -23,16 +22,16 @@ const CurrentWeatherForecast = ({ code, temp_word, temp, min, max, condition, fe
           </div>
           <div className="pressure">
             <p>Prerssure</p>
-            <p>{pressure} hPa</p>
+            <p>{pressure} {temperatureUnit === "C" ? "mmHg" : "hPa"}</p>
           </div>
           <div className="visibility">
             <p>Visibility</p>
             <p>{visibility} km</p>
           </div>
           <div className="wind">
-            <p>{dir}</p>
+            <p>{direction}</p>
             {/* <img className="direction" src="" alt="wind direction icon" /> */}
-            <p>{Math.floor(wind * 1000/ 3600)} m/s</p>
+            <p>{Math.floor(wind_km * 1000/ 3600)} m/s</p>
           </div>
           <div className="uv">
             <p>UV</p>
@@ -40,7 +39,7 @@ const CurrentWeatherForecast = ({ code, temp_word, temp, min, max, condition, fe
           </div>
           <div className="dew">
             <p>Dewpoint</p>
-            <p>{dewpoint}°{temp_word}</p>
+            <p>{dewpoint}°{temperatureUnit}</p>
           </div>
         </div>
       </div>
@@ -52,4 +51,4 @@ const CurrentWeatherForecast = ({ code, temp_word, temp, min, max, condition, fe
   )
 }
 
-  export default CurrentWeatherForecast
+export default CurrentWeather;

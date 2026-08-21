@@ -11,7 +11,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
-  background-image: url(../../public/background/rain_night.jpg);
+  background-image: url(/background/rain_night.jpg);
 }
 
 header {
@@ -180,7 +180,7 @@ sup {
   display: flex;
   flex-direction: column;
 }
-.date-switch {
+.date-buttons {
   display: flex;
   justify-content: center;
   margin-top: 10px;
