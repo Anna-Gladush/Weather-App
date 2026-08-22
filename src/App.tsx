@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import CurrentWeather from "./components/CurrentWeather";
 import Card from "./components/Card";
 import { weatherIcon, illustration } from './code';
+import Loader from './components/Loader';
 
 let initial = false;
 
@@ -74,9 +75,14 @@ const App = (): JSX.Element => {
     return () => clearInterval(interval);
   }, []);
 
-  if (loading) return <p>Loading...</p>
-
   return (
+  <div className='background' style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
+    <Loader/>
+    {/* <img src="/loader.svg" width={50} height="auto" /> */}
+  </div>
+)
+
+  if (loading) return (
     <div className='background'>
       <Header city={data !== null ? data.location.name : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
       handleSearch={handleSearch} query={query} setQuery={setQuery} loading={loading}/>
