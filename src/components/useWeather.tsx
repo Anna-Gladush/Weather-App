@@ -21,6 +21,15 @@ export function useWeather() {
 
       setData(json);
 
+      if ([1000, 1003, 1006, 1009, 1066, 1210, 1216, 1222, 1255, 1258, 1261, 1264].includes(json.current.condition.code)) {
+          document.documentElement.style.setProperty(
+            "--background",
+            "linear-gradient(180deg,rgba(64, 175, 255, 1) 0%, rgba(191, 217, 255, 1) 100%)"
+          )} else {
+            document.documentElement.style.setProperty(
+            "--background",
+            "linear-gradient(180deg, rgba(135, 204, 255, 1) 0%, rgba(38, 83, 155, 1) 100%)"
+          )}
     } catch (error) {
       setError(error.message)
     } finally {

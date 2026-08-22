@@ -1,10 +1,11 @@
 import type { JSX } from 'react';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useWeather } from "./components/useWeather";
-import Header from "./components/Header"
-import CurrentWeather from "./components/CurrentWeather"
-import Card from "./components/Card"
+import Header from "./components/Header";
+import CurrentWeather from "./components/CurrentWeather";
+import Card from "./components/Card";
+import { weatherIcon } from './code';
 
 let initial = false;
 
@@ -45,11 +46,11 @@ const App = (): JSX.Element => {
           if (!response.ok) {
             throw new Error("Couldn't fetch adress")
           }
-          console.log(response)
           return response.json();
         })
         .then((response) => {
-          fetchWeather(response.city)
+          fetchWeather(response.city);
+          
        })
         .catch((error) => {
           console.log(error)
@@ -74,7 +75,7 @@ const App = (): JSX.Element => {
       <Header city={data !== null ? data.location.name : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
       handleSearch={handleSearch} query={query} setQuery={setQuery} loading={loading}/>
       { data && <CurrentWeather
-        code={data.current.condition.code} 
+        code={weatherIcon(data.current.condition.code, data.current.is_day)} 
         temperatureUnit={temperatureUnit} 
         temp={temperatureUnit === 'C' ? data.current.temp_c :  data.current.temp_f}
         min={temperatureUnit === 'C' ? data.forecast.forecastday[0].day.mintemp_c : data.forecast.forecastday[0].day.mintemp_f}
@@ -113,7 +114,7 @@ const App = (): JSX.Element => {
                 temperatureUnit={temperatureUnit}
                 humidity={hour.humidity}
                 pressure={temperatureUnit === 'C' ? (Math.round(hour.pressure_mb *  0.75)) : hour.pressure_mb}
-                code={hour.condition.code}
+                code={weatherIcon(hour.condition.code, hour.is_day)}
                 key={hour.time}
                 />
               )

@@ -12,16 +12,21 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 
 ## Features
 
+<ul style="list-style-type: none;">
+  <li>✓ - finds weather forecast based on your ip location, as well as through search</li>
+  <li>✓ - custom weather icons</li>
+</ul>
+
 ## How to improve?
 
-- icons, images, background update;
-- css styling; adding mobile and tablet media queries;
-- adding scrolling to forecast;
-- "?" - adding description to params (wind speed, uv, pressure (?), humidity, visibility, dewpoint)
-- adding aqi;
-- adding map (rain)
-- adding translations to Russian
-- keyboard support
+<p>- background update;</p>
+<p>- css styling; adding mobile and tablet media queries;</p>
+<p>- adding scrolling to forecast;</p>
+<p>- "?" - adding description to params (wind speed, uv, pressure (?), humidity, visibility, dewpoint)</p>
+<p>- adding aqi;</p>
+<p>- adding map (rain)</p>
+<p>- adding translations to Russian</p>
+<p>- keyboard support</p>
 
 ## Running the project
 
