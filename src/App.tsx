@@ -38,6 +38,13 @@ const App = (): JSX.Element => {
     console.log(data)
   };
 
+  const wheelHandler = (e) => {
+    const container = document.querySelector('.forecast');
+    if (e.deltaY !== 0) {
+      e.preventDefault();
+      container.scrollLeft += e.deltaY > 0 ? 100 : -100 ;
+    }
+  }
   // Initial weather, from ip
   useEffect(() => {
     if (!initial) {
@@ -66,7 +73,6 @@ const App = (): JSX.Element => {
     const interval = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
-
 
   if (loading) return <p>Loading...</p>
 
@@ -102,9 +108,8 @@ const App = (): JSX.Element => {
 
           })}
         </div>)}
-
         {data && (
-          <div className='forecast'>
+          <div className='forecast' onWheel={(e) => wheelHandler(e)}>
           {data.forecast.forecastday[date].hour.map(
             hour => {
               return (
