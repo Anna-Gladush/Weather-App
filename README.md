@@ -2,6 +2,33 @@
 
 Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
 
+## Technologies
+
+<ul>
+  <li><code>React</code></li>
+  <li><code>TypeScript</code></li>
+  <li><code>i18next</code></li>
+</ul>
+
+## Features
+
+## How to improve?
+
+- icons, images, background update;
+- css styling; adding mobile and tablet media queries;
+- adding scrolling to forecast;
+- "?" - adding description to params (wind speed, uv, pressure (?), humidity, visibility, dewpoint)
+- adding aqi;
+- adding map (rain)
+- adding translations to Russian
+- keyboard support
+
+## Running the project
+
+## Live Preview
+
+## What I learned + Addittional information
+
 <table>
 <caption>Information about Weather Conditions codes from <a href="https://www.weatherapi.com/docs/weather_conditions.xml">WeatherAPI</a></caption>
   <tr>
@@ -204,7 +231,7 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
   </tr>
 <table>
 
-### Resources:
+## Resources:
 
 - Sound: Sound Effect "Thunder Sound" by <a href="https://pixabay.com/users/soundreality-31074404/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=375727">Jurij</a>, Sound Effect "CALMING RAIN" by <a href="https://pixabay.com/users/liecio-3298866/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=257596">LIECIO</a>, Sound Effect "Forest,birds" by <a href="https://pixabay.com/users/dany_photo-42436275/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=319791">Dany_photo</a>
 

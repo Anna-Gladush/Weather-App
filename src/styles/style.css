@@ -7,12 +7,12 @@
 :root {
   --accent: #37418a;
 }
-.background {
+/* .background {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
   background-image: url(/background/rain_night.jpg);
-}
+} */
 
 header {
   /* padding-top: 50px; */

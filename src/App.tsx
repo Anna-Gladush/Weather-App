@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { format } from 'date-fns'
 import { useEffect, useState } from 'react';
 import { useWeather } from "./components/useWeather";
@@ -5,7 +6,9 @@ import Header from "./components/Header"
 import CurrentWeather from "./components/CurrentWeather"
 import Card from "./components/Card"
 
-const App = () => {
+let initial = false;
+
+const App = (): JSX.Element => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [temperatureUnit, setTemperatureUnit] = useState('C');
   const [query, setQuery] = useState('');
@@ -26,7 +29,7 @@ const App = () => {
         setDate(Number(index));
       }
     })
-  }
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -34,11 +37,38 @@ const App = () => {
     console.log(data)
   };
 
+  // Initial weather, from ip
+  useEffect(() => {
+    if (!initial) {
+      fetch(`http://ip-api.com/json/?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,query`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Couldn't fetch adress")
+          }
+          console.log(response)
+          return response.json();
+        })
+        .then((response) => {
+          fetchWeather(response.city)
+       })
+        .catch((error) => {
+          console.log(error)
+       })
+        .finally(() => {
+          initial = true;
+       })
+    }
+  }, [])
+
   useEffect(() => {
     // Current time
     const interval = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(interval);
-  }, [])
+  }, []);
+
+
+  if (loading) return <p>Loading...</p>
+
   return (
     <div className='background'>
       <Header city={data !== null ? data.location.name : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
