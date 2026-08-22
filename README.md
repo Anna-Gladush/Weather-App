@@ -21,7 +21,7 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 ## How to improve?
 
 <p>- css styling; adding mobile and tablet media queries;</p>
-<p>- "?" - adding description to params (wind speed, uv, pressure (?), humidity, visibility, dewpoint)</p>
+<p>- tooltip "?" - adding description to params (wind speed, uv, pressure (?), humidity, visibility, dewpoint)</p>
 <p>- adding aqi;</p>
 <p>- adding map (rain)</p>
 <p>- adding translations to Russian</p>

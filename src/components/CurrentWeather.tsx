@@ -1,9 +1,9 @@
-const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feelslike, humidity, pressure, visibility, direction, wind_km, uv, dewpoint}) => {
+const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feelslike, humidity, pressure, visibility, direction, wind_km, uv, dewpoint, illustration}) => {
   return (
     <>
     <div className="today">
       <div className="day">
-        <p>CURRENT WEATHER {code}</p>
+        <p>CURRENT WEATHER</p>
         <div className="day-info">
           <div className="info-left">
             <span>{temp}</span><sup>°{temperatureUnit}</sup>
@@ -46,7 +46,7 @@ const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feel
         </div>
       </div>
       <div className="illustration">
-        {/* <img alt="" src=""> */}
+        <img alt="" src={`/illustrations/${illustration}.svg`} />
       </div>
     </div>
     </>

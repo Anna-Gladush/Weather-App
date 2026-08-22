@@ -1,4 +1,4 @@
-export const weatherIcon = (code, day) => {
+export const weatherIcon = (code: number, day: number) => {
   if ([1000].includes(code)){
     return day === 1 ? '01d' : '01n';
   } else if ([1003].includes(code)) {
@@ -32,3 +32,17 @@ export const weatherIcon = (code, day) => {
   }
 }
 
+export const illustration = (icon: string) => {
+  let illustration = "";
+
+  if (icon === '05d' || icon === '05n' || icon === '06d' || icon === '06n' || icon === '07' || icon === '13') {
+    illustration = 'snow';
+  } else if (icon === '08d' || icon === '08n' || icon === '11' || icon === '12d' || icon === '12n' || icon === '14' || icon === '10d' || icon === '10n' || icon === '09') {
+    illustration = 'rain';
+  } else if (icon === '01d' || icon === '01n') {
+    illustration = (icon === '01d') ? 'clear' : 'cold' ;
+  } else if (icon === '02d' || icon === '02n' ||  icon === '03' || icon === '04' || icon === '50') {
+    illustration = 'wind';
+  }
+  return illustration;
+}

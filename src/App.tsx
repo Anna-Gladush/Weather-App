@@ -5,7 +5,7 @@ import { useWeather } from "./components/useWeather";
 import Header from "./components/Header";
 import CurrentWeather from "./components/CurrentWeather";
 import Card from "./components/Card";
-import { weatherIcon } from './code';
+import { weatherIcon, illustration } from './code';
 
 let initial = false;
 
@@ -95,6 +95,7 @@ const App = (): JSX.Element => {
         wind_km={data.current.wind_kph}
         uv={data.current.uv}
         dewpoint={temperatureUnit === 'C' ? data.current.dewpoint_c :  data.current.dewpoint_f}
+        illustration={illustration(weatherIcon(data.current.condition.code, data.current.is_day))}
       />}
 
           {data && (
