@@ -75,14 +75,13 @@ const App = (): JSX.Element => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
+  if (loading) return (
   <div className='background' style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
     <Loader/>
-    {/* <img src="/loader.svg" width={50} height="auto" /> */}
   </div>
 )
 
-  if (loading) return (
+  return (
     <div className='background'>
       <Header city={data !== null ? data.location.name : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
       handleSearch={handleSearch} query={query} setQuery={setQuery} loading={loading}/>

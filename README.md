@@ -14,7 +14,7 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 
 <ul style="list-style-type: none;">
   <li>✓ - finds weather forecast based on your ip location, as well as through search</li>
-  <li>✓ - custom weather icons</li>
+  <li>✓ - custom weather icons + custom spinner (made in SVGATOR)</li>
   <li></li>
 </ul>
 

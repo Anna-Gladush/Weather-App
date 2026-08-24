@@ -15,6 +15,10 @@
   background-image: url(/background/rain_night.jpg);
 } */
 
+.leaflet-control-attribution {
+    display: none;
+  }
+
 .background {
   background: var(--background);
   width: 100vw;
