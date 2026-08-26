@@ -3,7 +3,7 @@ const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feel
     <>
     <div className="today">
       <div className="day">
-        <p>CURRENT WEATHER</p>
+        <p>CURRENT</p>
         <div className="day-info">
           <div className="info-left">
             <span>{temp}</span><sup>°{temperatureUnit}</sup>

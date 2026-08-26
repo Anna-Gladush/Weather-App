@@ -8,9 +8,11 @@ import Card from "./components/Card";
 import { weatherIcon, illustration } from './code';
 import Loader from './components/Loader';
 import Map from './components/Map'
+import Alert from './components/Alert';
 
 let initial = false;
 let map = true;
+
 const App = (): JSX.Element => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [temperatureUnit, setTemperatureUnit] = useState('C');
@@ -123,10 +125,10 @@ const App = (): JSX.Element => {
           <div className='forecast' onWheel={(e) => wheelHandler(e)}>
           {data.forecast.forecastday[date].hour.map(
             hour => {
-              if (format(new Date(hour.time), "HH") < format(new Date(), "HH") && format(new Date(hour.time), "dd") === format(new Date(), "dd")) return
+              if (format(hour.time, "HH") < format(data.location.localtime, "HH") && format(new Date(hour.time), "dd") === format(new Date(), "dd")) return
               return (
                 <Card 
-                date={hour.time} 
+                date={format(new Date(hour.time), "H:mm")} 
                 temp={temperatureUnit === 'C' ? hour.temp_c : hour.temp_f} 
                 temperatureUnit={temperatureUnit}
                 humidity={hour.humidity}
@@ -138,6 +140,9 @@ const App = (): JSX.Element => {
             }
         )}
         </div>)}
+        {data && data.alerts.alert.length > 0 && 
+          (<Alert alerts={data.alerts.alert}/>)
+        }
     </div>
   )
 }

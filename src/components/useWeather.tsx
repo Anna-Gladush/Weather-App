@@ -47,91 +47,21 @@ function getAQILabel(index) {
   return { label: labels[index] || 'Unknown', color: colors[index] || '#ccc' };
 }
 
-// Weather icon component (uses WeatherAPI's icon URLs)
-function WeatherIcon({ iconUrl, size = 64, alt }) {
-  return (
-    <img
-      src={iconUrl}
-      alt={alt}
-      width={size}
-      height={size}
-    />
-  );
-}
-
 // Current weather card
 function CurrentWeather({ location, current }) {
   const aqi = current.air_quality?.['us-epa-index'];
   const aqiInfo = aqi ? getAQILabel(aqi) : null;
 
-  return (
-    <div style={styles.card}>
-      <div style={styles.locationHeader}>
-        <h2 style={styles.locationName}>{location.name}</h2>
-        <p style={styles.locationSub}>{location.region}, {location.country}</p>
-        <p style={styles.localTime}>🕐 {location.localtime}</p>
-      </div>
-
-      <div style={styles.currentMain}>
-        <WeatherIcon iconUrl={current.condition.icon} size={80} alt={current.condition.text} />
-        <div>
-          <p style={styles.tempLarge}>{current.temp_c}°C</p>
-          <p style={styles.conditionText}>{current.condition.text}</p>
-          <p style={styles.feelsLike}>Feels like {current.feelslike_c}°C</p>
-        </div>
-      </div>
-
-      <div style={styles.detailsGrid}>
-        <DetailItem icon="💨" label="Wind" value={`${current.wind_kph} km/h ${current.wind_dir}`} />
-        <DetailItem icon="💧" label="Humidity" value={`${current.humidity}%`} />
-        <DetailItem icon="👁️" label="Visibility" value={`${current.vis_km} km`} />
-        <DetailItem icon="📊" label="Pressure" value={`${current.pressure_mb} mb`} />
-        <DetailItem icon="☀️" label="UV Index" value={current.uv} />
-        <DetailItem icon="💨" label="Gusts" value={`${current.gust_kph} km/h`} />
-      </div>
-
-      {aqiInfo && (
-        <div style={{ ...styles.aqiBadge, backgroundColor: aqiInfo.color }}>
-          Air Quality: {aqiInfo.label}
-        </div>
-      )}
-    </div>
-  );
+  // return (
+  //     {aqiInfo && (
+  //       <div style={{ ...styles.aqiBadge, backgroundColor: aqiInfo.color }}>
+  //         Air Quality: {aqiInfo.label}
+  //       </div>
+  //     )}
+  // );
 }
 
-function DetailItem({ icon, label, value }) {
-  return (
-    <div style={styles.detailItem}>
-      <span>{icon}</span>
-      <span style={styles.detailLabel}>{label}</span>
-      <span style={styles.detailValue}>{value}</span>
-    </div>
-  );
-}
 
-// Forecast day card
-function ForecastDay({ day }) {
-  return (
-    <div style={styles.forecastDay}>
-      <p style={styles.forecastDate}>
-        {new Date(day.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
-      </p>
-      <WeatherIcon iconUrl={day.day.condition.icon} size={40} alt={day.day.condition.text} />
-      <p style={styles.forecastCondition}>{day.day.condition.text}</p>
-      <p style={styles.forecastTemp}>
-        <span style={{ color: '#e74c3c' }}>{day.day.maxtemp_c}°</span>
-        {' / '}
-        <span style={{ color: '#3498db' }}>{day.day.mintemp_c}°</span>
-      </p>
-      <p style={styles.forecastRain}>🌧 {day.day.daily_chance_of_rain}%</p>
-      <p style={styles.forecastAstro}>
-        🌅 {day.astro.sunrise} · 🌇 {day.astro.sunset}
-      </p>
-    </div>
-  );
-}
-
-// Main weather widget
 export default function WeatherWidget() {
   const [query, setQuery] = useState('');
   const { data, loading, error, fetchWeather } = useWeather();
@@ -153,18 +83,9 @@ export default function WeatherWidget() {
         <div style={styles.error}>⚠️ {error}</div>
       )}
 
-      {data && (
-        <>
-          <CurrentWeather location={data.location} current={data.current} />
 
-          <h3 style={styles.forecastTitle}>3-Day Forecast</h3>
-          <div style={styles.forecastGrid}>
-            {data.forecast.forecastday.map((day) => (
-              <ForecastDay key={day.date} day={day} />
-            ))}
-          </div>
 
-          {data.alerts?.alert?.length > 0 && (
+          {/* {data.alerts?.alert?.length > 0 && (
             <div style={styles.alertBox}>
               <h4>⚠️ Weather Alerts</h4>
               {data.alerts.alert.map((alert, i) => (
@@ -173,7 +94,7 @@ export default function WeatherWidget() {
             </div>
           )}
         </>
-      )}
+      )} */}
     </div>
   );
 }
