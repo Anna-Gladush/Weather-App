@@ -30,8 +30,8 @@ const Header = ({city, temperatureUnit, handleUnitChange, time, handleSearch, qu
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Enter city, zip code, or coordinates..."
         />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Loading...' : 'Get Weather'}
+        <button type="submit" className="search-button" disabled={loading}>
+          {loading ? 'Loading...' : ''}
         </button>
       </form>
     </header>

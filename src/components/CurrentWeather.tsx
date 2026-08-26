@@ -29,10 +29,8 @@ const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feel
             <p>{visibility} km</p>
           </div>
           <div className="wind">
-            <div>
-              <p>{direction}</p>
-              <img src={`/icons/direction/${direction.toLowerCase()}.svg`} alt="wind direction icon" />
-            </div>
+            <p>{direction}</p>
+            <img src={`/icons/direction/${direction.toLowerCase()}.svg`} alt="wind direction icon" />         
             <p>{Math.floor(wind_km * 1000/ 3600)} m/s</p>
           </div>
           <div className="uv">

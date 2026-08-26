@@ -7,9 +7,10 @@ import CurrentWeather from "./components/CurrentWeather";
 import Card from "./components/Card";
 import { weatherIcon, illustration } from './code';
 import Loader from './components/Loader';
+import Map from './components/Map'
 
 let initial = false;
-
+let map = true;
 const App = (): JSX.Element => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [temperatureUnit, setTemperatureUnit] = useState('C');
@@ -81,6 +82,10 @@ const App = (): JSX.Element => {
   </div>
 )
 
+//  {data ? ( <p> hello </p>) : 
+        // <Map position={[51.505, -0.09]} zoom={13} city={"london"} country={"GB"} lat={51.505} lon={-0.09} temp={temperatureUnit === 'C' ? data.current.temp_c :  data.current.temp_f} temperatureUnit={temperatureUnit} loading={false} spinner={Loader}/>}
+
+
   return (
     <div className='background'>
       <Header city={data !== null ? data.location.name : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
@@ -118,6 +123,7 @@ const App = (): JSX.Element => {
           <div className='forecast' onWheel={(e) => wheelHandler(e)}>
           {data.forecast.forecastday[date].hour.map(
             hour => {
+              if (format(new Date(hour.time), "HH") < format(new Date(), "HH") && format(new Date(hour.time), "dd") === format(new Date(), "dd")) return
               return (
                 <Card 
                 date={hour.time} 
