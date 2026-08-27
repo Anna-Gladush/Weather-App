@@ -1,4 +1,5 @@
 import type { JSX } from "react/jsx-dev-runtime";
+import { useTranslation } from 'react-i18next';
 
 type HeaderProps = {
   city: string,
@@ -8,34 +9,37 @@ type HeaderProps = {
   time: string,
   query: string,
   setQuery: React.Dispatch<React.SetStateAction<string>>,
-  loading: boolean
+  loading: boolean,
+  handleChangeLanguage: () => void
 }
 
-const Header = ({city, temperatureUnit, handleUnitChange, time, handleSearch, query, setQuery, loading}: HeaderProps): JSX.Element => {
+const Header = ({city, temperatureUnit, handleUnitChange, time, handleSearch, query, setQuery, loading, handleChangeLanguage}: HeaderProps): JSX.Element => {
+  const { t } = useTranslation("translation")
   return (
     <header>
       <div className="city">
         <img src="/icons/map.svg" alt="map" width={25}/>
         <p id="city">{city}</p>
       </div>
-      <div className="button-metric">
-        <button className={`unit metric ${temperatureUnit === 'C' ? 'active' : 'not-active'}`} onClick={() => handleUnitChange('metric')}>°C</button>
-        <button className={`unit imperial ${temperatureUnit === 'F' ? 'active' : 'not-active'}`} onClick={() => handleUnitChange('imperial')}>°F</button>
-      </div>
+
       <p>{time}</p>
       <form onSubmit={handleSearch} className="search">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter city, zip code, or coordinates..."
+          placeholder={t("header.searchPlaceholder")}
         />
         <button type="submit" className="search-button" disabled={loading}>
-          {loading ? 'Loading...' : ''}
+          {loading ? t("header.loading") : ''}
         </button>
       </form>
+      <div className="button-metric">
+        <button className={`unit metric ${temperatureUnit === 'C' ? 'active' : 'not-active'}`} onClick={() => handleUnitChange('metric')}>°C</button>
+        <button className={`unit imperial ${temperatureUnit === 'F' ? 'active' : 'not-active'}`} onClick={() => handleUnitChange('imperial')}>°F</button>
+      </div>
+      <button onClick={handleChangeLanguage}>{t("changeLang")}</button>
     </header>
   )
 }
-// handleSearch, query, setQuery, loading
 export default Header;

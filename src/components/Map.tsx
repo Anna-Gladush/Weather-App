@@ -1,10 +1,20 @@
 import 'leaflet/dist/leaflet.css';
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-// import * as L from "leaflet"
+import type { JSX } from 'react';
+import { useTranslation } from 'react-i18next';
 
-// {position}
-const Map = ({position, zoom, city, country, temp, temperatureUnit}) => {
+type MapProps = {
+  position: [number, number],
+  zoom: number,
+  city: string,
+  country: string,
+  temp: number,
+  temperatureUnit: string
+}
+
+const Map = ({position, zoom, city, country, temp, temperatureUnit}: MapProps): JSX.Element => {
+  const { t } = useTranslation("translation")
   const API_key = import.meta.env.VITE_OPENWEATHER_API;
   const [tiles, setTiles] = useState({
     temperature: false,
@@ -12,13 +22,12 @@ const Map = ({position, zoom, city, country, temp, temperatureUnit}) => {
     wind: false,
     pressure: false
   })
-  // const url =  "http://maps.openweathermap.org/maps/2.0/weather";
 
   return (
     <>
       <form className='map-options'>
-        <h3>Weather Overlays:</h3>
-        <label>temperature: <input type="checkbox" name="temperature" id="temperature" onChange={() => {
+        <h3>{t("map.weatherOverlays")}</h3>
+        <label>{t("map.temperature")}<input type="checkbox" name="temperature" id="temperature" onChange={() => {
           setTiles((prev) => ({
             ...tiles,
             temperature: !prev.temperature
@@ -26,7 +35,7 @@ const Map = ({position, zoom, city, country, temp, temperatureUnit}) => {
           )
         }}/></label>
         
-        <label>clouds & precipitation: <input type="checkbox" name="rain" id="rain"
+        <label>{t("map.cloudsPerc")}<input type="checkbox" name="rain" id="rain"
         onChange={() => {
           setTiles((prev) => ({
             ...tiles,
@@ -35,7 +44,7 @@ const Map = ({position, zoom, city, country, temp, temperatureUnit}) => {
           )
         }}/></label>
         
-        <label>wind: <input type="checkbox" name="wind" id="wind"
+        <label>{t("map.wind")}<input type="checkbox" name="wind" id="wind"
         onChange={() => {
           setTiles((prev) => ({
             ...tiles,
@@ -44,7 +53,7 @@ const Map = ({position, zoom, city, country, temp, temperatureUnit}) => {
           )
         }}/></label>
 
-        <label>pressure: <input type="checkbox" name="pressure" id="pressure"
+        <label>{t("map.pressure")}<input type="checkbox" name="pressure" id="pressure"
         onChange={() => {
           setTiles((prev) => ({
             ...tiles,
@@ -53,7 +62,7 @@ const Map = ({position, zoom, city, country, temp, temperatureUnit}) => {
           )
         }}/></label>
       </form>
-      <MapContainer center={position} zoom={zoom} style={{height: '300px', width: "50vw", fontSize: "1em"}} scrollWheelZoom={true}>
+      <MapContainer center={position} zoom={zoom} style={{height: '300px', width: "100vw", fontSize: "1em"}} scrollWheelZoom={true}>
         {/* Base Layer */}
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 

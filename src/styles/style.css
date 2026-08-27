@@ -8,12 +8,13 @@
   --accent: #37418a;
   --background: linear-gradient(180deg,rgba(64, 175, 255, 1) 0%, rgba(191, 217, 255, 1) 100%);
 }
-/* .background {
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-  background-image: url(/background/rain_night.jpg);
-} */
+
+.mark {
+  background-color: var(--accent);
+  color: white;
+  padding: 0 3px;
+  border-radius: 2px;
+}
 
 .leaflet-control-attribution {
   display: none;
@@ -153,7 +154,12 @@ main {
   grid-template-columns: repeat(3, 150px);
   gap: 20px;
 }
-.info-bottom div {
+.info-bottom .dew,
+.air-quality,
+.wind,
+.visibility,
+.pressure,
+.humidity {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,14 +185,15 @@ sup {
   display: flex;
   flex-direction: column;
 }
-.air-quality {
+.uv {
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.2);
   height: 220px;
-  width: 150px;
+  width: fit-content;
+  text-wrap: pretty;
   border-radius: 10px;
   margin-left: 12px;
 }
@@ -196,10 +203,12 @@ sup {
   width: 50px;
   height: 50px;
 }
-
+.wind {
+  gap: 3px;
+}
 .wind img {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 .info-left img{
   height: 100px
@@ -345,3 +354,80 @@ button.change-view {
 .alerts p {
   padding-block: 10px;
 }
+
+@media screen and (min-width: 320px) and (max-width: 1200px), (max-height: 900px) {
+  .background {
+    width: auto;
+    height: auto;
+  }
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  header p#city {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  header .button-metric button {
+    width: 60px;
+    height: 20px;
+    font-size: 14px;
+  }
+  header form input{
+    width: 300px;
+  }
+  div.view,
+  .day,
+  .day-info,
+  .info-day,
+  .illustration,
+  .today {
+    display: block;
+  }
+  .day-info p,
+  .day-info span,
+  .current-title {
+    margin-left: 20px;
+  }
+  .day-info {
+    margin-bottom: 20px;
+  }
+  .info-bottom {
+    display: flex;
+    flex-direction: column;
+  }
+  .uv {
+    width: auto;
+    height: auto;
+    padding: 28px;
+    margin-block: 20px; 
+    margin-left: 0;
+  }
+  .illustration img,
+  .illustration {
+    width: 150px;
+  }
+  button.change-view {
+    margin: 30px;
+  }
+  .view {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .leaflet-container {
+   width: 70vw;
+   height: 200px;
+  }
+}
+
+/* @media screen and  {
+  .background {
+    /* overflow-x: auto; */
+    /* width: auto;
+  }
+  .forecast {
+    height: 230px;
+  }
+} */ 

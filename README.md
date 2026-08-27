@@ -1,6 +1,6 @@
 # Weather App
 
-Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
+Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a> and <a href="https://openweathermap.org/api/" title="OpenWeatherMap API">OpenWeatherMap.org</a>
 
 ## Technologies
 
@@ -8,6 +8,7 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
   <li><code>React</code></li>
   <li><code>TypeScript</code></li>
   <li><code>i18next</code></li>
+  <li><code>leaflet</code>, <code>react-leaflet</code></li>
 </ul>
 
 ## Features
@@ -16,23 +17,36 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
   <li>✓ - finds weather forecast based on your ip location, as well as through search</li>
   <li>✓ - custom weather icons + custom spinner (made in SVGATOR)</li>
   <li>✓ - map view with temperature, wind, percipitation + clouds, pressure layers</li>
-  <li>✓ - aqi information</li>
+  <li>✓ - AQI and UV information</li>
+  <li>✓ - tooltips with additional information</li>
 </ul>
 
 ## How to improve?
 
-<p>- css styling; adding mobile and tablet media queries;</p>
-<p>- tooltip "?" - adding description to params (wind speed, uv, pressure (?), humidity, visibility, dewpoint)</p>
 <p>- adding translations to Russian</p>
 <p>- keyboard support</p>
 
 ## Running the project
 
+1. You need to have an OpenWeather Account and WeatherAPI Account, follow the instructions described <a href="https://openweathermap.org/api">here</a> and <a href="https://www.weatherapi.com/signup.aspx">here</a> to create an account and grab an API key.
+   2)Clone the repository
+
+<code>git clone https://github.com/Anna-Gladush/Weather-App.git</code>
+
+3. Install the packages using the command <code>npm install</code>
+
+4. Create a <code>.env</code> file in the root directory of the project. Add the following properties in it:
+
+VITE_WEATHER_API=<your WeatherAPI Key>
+VITE_OPENWEATHER_API=<your OpenWeather API Key>
+
 ## Live Preview
 
-## What I learned + Addittional information
+## What I learned
 
 How to work with leaflet, weatherAPI and OpenWeatherMap API; practiced custom useHooks;
+
+## Addittional information
 
 <table>
 <caption>Information about Weather Conditions codes from <a href="https://www.weatherapi.com/docs/weather_conditions.xml">WeatherAPI</a></caption>
@@ -237,22 +251,6 @@ How to work with leaflet, weatherAPI and OpenWeatherMap API; practiced custom us
 <table>
 
 ## Resources:
-
-- Sound: Sound Effect "Thunder Sound" by <a href="https://pixabay.com/users/soundreality-31074404/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=375727">Jurij</a>, Sound Effect "CALMING RAIN" by <a href="https://pixabay.com/users/liecio-3298866/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=257596">LIECIO</a>, Sound Effect "Forest,birds" by <a href="https://pixabay.com/users/dany_photo-42436275/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=319791">Dany_photo</a>
-
-- Background images were marked as Public Domain or CC0 and are free to use. <a href="https://free-images.com">Site</a>
-
-<!--
-- Background photos: <a href="https://unsplash.com/photos/grassy-shore-of-a-calm-lake-with-hills-beyond-uX0-txbC9x8">Grassy shore of a calm lake with hills beyond</a> by <a href="https://unsplash.com/@pulchra_prospectus">Bahadir Cobanoglu</a>, <a href="https://unsplash.com/photos/clouds-in-the-sky-with-smoke-coming-out-of-it-LW_o-S1fmFk
-  ">clouds in the sky with smoke coming out of it</a> by <a href="https://unsplash.com/@carrie_borden">
-  Carrie Borden</a>, <a href="https://unsplash.com/photos/a-full-moon-is-seen-through-the-clouds-6_sz4q0P4rk">a full moon is seen through the clouds</a> by <a href="https://unsplash.com/@s_ahmadreza_p">
-  Ahmad Pishnamazi</a>, <a href="https://unsplash.com/photos/a-black-and-white-photo-of-snow-falling-PzhmEp_aDU4">a black and white photo of snow falling</a> by <a href="https://unsplash.com/@aditya1702">
-  Aditya Vyas</a>, <a href="https://unsplash.com/photos/green-tree-rlLz08x6FFk">green tree</a> by <a href="https://unsplash.com/@oceanrahan">
-  Ocean Rahan</a>, <a href="https://unsplash.com/photos/mountains-with-trees-under-white-star-at-night-L95xDkSSuWw
-  ">mountains with trees under white star at night</a> by <a href="https://unsplash.com/@nathananderson">
-  Nathan Anderson</a>, <a href="https://unsplash.com/photos/grayscale-photo-of-trees-and-road-cM4OgdYWqFY">grayscale photo of trees and road</a> by <a href="https://unsplash.com/@presentsquare">Presentsquare</a>, <a href="https://unsplash.com/photos/single-cell-thunderstorm-JG_HfydoNqY">single cell thunderstorm</a> by <a href="https://unsplash.com/@noaa">NOAA</a>,<a href="https://unsplash.com/photos/white-clouds-and-blue-sky-during-daytime-3ihnKT5apmg">white clouds and blue sky during daytime</a> by <a href="https://unsplash.com/@enginakyurt">engin akyurt</a>, <a href="https://unsplash.com/photos/a-close-up-of-a-tree-branch-with-rain-2JvQ3gL4dqQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">a close up of a tree branch with rain</a> by <a href="https://unsplash.com/@jwvein">Janusz Walczak</a>, <a href="https://unsplash.com/photos/worms-eye-view-of-tree-covered-with-snow-klNpWLkgezo">worm's-eye view of tree covered with snow</a> by <a href="https://unsplash.com/@wilstewart3">Wil Stewart</a>, -->
-
-- Forecast icons: <a href="https://www.freepik.com/free-vector/weather-icons-collection_1044316.htm#fromView=search&page=1&position=24&uuid=0998b45c-d684-4290-8002-f076301844ab&query=forecast">Image by bamdewanto on Freepik</a>
 
 - Woman in different seasons illustaration set: <a href="https://www.freepik.com/free-vector/woman-different-seasons-set_5889720.htm#fromView=search&page=1&position=33&uuid=a92f24d5-e6d9-4acc-a5eb-562bfe6613e8&query=human+weather">Image by pch.vector on Freepik</a>
 

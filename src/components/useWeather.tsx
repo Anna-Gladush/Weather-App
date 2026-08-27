@@ -12,7 +12,7 @@ export function useWeather() {
     setLoading(true)
     
     try {
-      const response =  await fetch(`${API_BASE_URL}/forecast.json?key=${API_KEY}&q=${location}&days=3&aqi=yes&alerts=yes&pollen=yes`);
+      const response =  await fetch(`${API_BASE_URL}/forecast.json?key=${API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes&pollen=yes`);
       const json = await response.json();
 
       if (!response.ok) {
@@ -39,95 +39,3 @@ export function useWeather() {
 
   return { data, loading, error, fetchWeather }
 }
-
-// Air quality label helper
-function getAQILabel(index) {
-  const labels = ['', 'Good', 'Moderate', 'Unhealthy (Sensitive)', 'Unhealthy', 'Very Unhealthy', 'Hazardous'];
-  const colors = ['', '#00e400', '#ffff00', '#ff7e00', '#ff0000', '#8f3f97', '#7e0023'];
-  return { label: labels[index] || 'Unknown', color: colors[index] || '#ccc' };
-}
-
-// Current weather card
-function CurrentWeather({ location, current }) {
-  const aqi = current.air_quality?.['us-epa-index'];
-  const aqiInfo = aqi ? getAQILabel(aqi) : null;
-
-  // return (
-  //     {aqiInfo && (
-  //       <div style={{ ...styles.aqiBadge, backgroundColor: aqiInfo.color }}>
-  //         Air Quality: {aqiInfo.label}
-  //       </div>
-  //     )}
-  // );
-}
-
-
-export default function WeatherWidget() {
-  const [query, setQuery] = useState('');
-  const { data, loading, error, fetchWeather } = useWeather();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (query.trim()) fetchWeather(query.trim());
-    console.log(data)
-  };
-
-  return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>🌤️ Weather Forecast</h1>
-      <p style={styles.subtitle}>Powered by WeatherAPI.com</p>
-
-      
-
-      {error && (
-        <div style={styles.error}>⚠️ {error}</div>
-      )}
-
-
-
-          {/* {data.alerts?.alert?.length > 0 && (
-            <div style={styles.alertBox}>
-              <h4>⚠️ Weather Alerts</h4>
-              {data.alerts.alert.map((alert, i) => (
-                <p key={i}><strong>{alert.headline}</strong> — {alert.desc}</p>
-              ))}
-            </div>
-          )}
-        </>
-      )} */}
-    </div>
-  );
-}
-
-const styles = {
-  container: { maxWidth: 700, margin: '0 auto', padding: 24, fontFamily: 'system-ui, sans-serif' },
-  title: { fontSize: 28, fontWeight: 700, marginBottom: 4 },
-  subtitle: { color: '#666', marginBottom: 24 },
-  form: { display: 'flex', gap: 8, marginBottom: 24 },
-  input: { flex: 1, padding: '10px 14px', fontSize: 16, border: '1px solid #ddd', borderRadius: 8 },
-  button: { padding: '10px 20px', fontSize: 16, background: '#3498db', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer' },
-  card: { background: '#f8f9fa', borderRadius: 12, padding: 24, marginBottom: 24 },
-  locationHeader: { marginBottom: 16 },
-  locationName: { fontSize: 24, fontWeight: 700, margin: 0 },
-  locationSub: { color: '#666', margin: '4px 0' },
-  localTime: { color: '#888', margin: 0, fontSize: 14 },
-  currentMain: { display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 },
-  tempLarge: { fontSize: 48, fontWeight: 700, margin: 0 },
-  conditionText: { fontSize: 18, color: '#555', margin: 0 },
-  feelsLike: { color: '#888', margin: '4px 0 0 0' },
-  detailsGrid: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 },
-  detailItem: { display: 'flex', background: '#fff', padding: '8px 12px', borderRadius: 8 },
-  detailLabel: { fontSize: 12, color: '#888' },
-  detailValue: { fontSize: 14, fontWeight: 600 },
-  aqiBadge: { display: 'inline-block', padding: '4px 12px', borderRadius: 20, fontSize: 13, fontWeight: 600, marginTop: 12, color: '#333' },
-  forecastTitle: { fontSize: 18, fontWeight: 600, marginBottom: 12 },
-  forecastGrid: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 24 },
-  forecastDay: { background: '#f8f9fa', borderRadius: 12, padding: 16 },
-  forecastDate: { fontWeight: 600, margin: '0 0 8px' },
-  forecastCondition: { fontSize: 13, color: '#555', margin: '4px 0' },
-  forecastTemp: { fontSize: 16, fontWeight: 600, margin: '4px 0' },
-  forecastRain: { fontSize: 13, color: '#3498db', margin: '4px 0' },
-  forecastAstro: { fontSize: 11, color: '#888', margin: '4px 0 0' },
-  error: { background: '#fee', border: '1px solid #fcc', borderRadius: 8, padding: 12, marginBottom: 16, color: '#c33' },
-  alertBox: { background: '#fff3cd', border: '1px solid #ffc107', borderRadius: 8, padding: 16 },
-};

@@ -9,6 +9,10 @@ import { weatherIcon, illustration } from './code';
 import Loader from './components/Loader';
 import Map from './components/Map'
 import Alert from './components/Alert';
+import 'react-tooltip/dist/react-tooltip.css'
+import { useTranslation } from 'react-i18next';
+
+
 
 let initial = false;
 
@@ -19,12 +23,12 @@ const App = (): JSX.Element => {
   const [query, setQuery] = useState('');
   const [date, setDate] = useState(0)
   const [activeView, setActiveView] = useState("weather")
-
-
-  const aqi_labels = ['', 'Good', 'Moderate', 'Unhealthy (Sensitive)', 'Unhealthy', 'Very Unhealthy', 'Hazardous'];
-
-  const aqi = data.current.air_quality?.['us-epa-index'];
-  const aqiInfo = aqi ? aqi_labels[aqi] : null;
+  const { i18n, t } = useTranslation("translation")
+  
+  const handleChangeLanguage = () => {
+    const newLanguage = i18n.language === "ru" ? "en" : "ru";
+    i18n.changeLanguage(newLanguage);
+  }
 
   const changeView = () => {
     setActiveView(activeView === "weather" ? "map" : "weather")
@@ -59,6 +63,7 @@ const App = (): JSX.Element => {
       container.scrollLeft += e.deltaY > 0 ? 100 : -100 ;
     }
   }
+
   // Initial weather, from ip
   useEffect(() => {
     if (!initial) {
@@ -94,14 +99,16 @@ const App = (): JSX.Element => {
   </div>
 )
 
-//  {data ? ( <p> hello </p>) : 
-        // <Map position={[51.505, -0.09]} zoom={13} city={"london"} country={"GB"} lat={51.505} lon={-0.09} temp={temperatureUnit === 'C' ? data.current.temp_c :  data.current.temp_f} temperatureUnit={temperatureUnit} loading={false} spinner={Loader}/>}
-
+  if (error) return (
+    <div className='background' style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
+      <p>{error}</p>
+    </div>
+  )
 
   return (
     <div className='background'>
       <Header city={data !== null ? `${data.location.name}, ${data.location.country}` : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
-      handleSearch={handleSearch} query={query} setQuery={setQuery} loading={loading}/>
+      handleSearch={handleSearch} query={query} setQuery={setQuery} loading={loading} handleChangeLanguage={handleChangeLanguage}/>
       
       <div className='view'>
         { data && 
@@ -122,15 +129,15 @@ const App = (): JSX.Element => {
         wind_km={data.current.wind_kph}
         uv={data.current.uv}
         dewpoint={temperatureUnit === 'C' ? data.current.dewpoint_c :  data.current.dewpoint_f}
-        air_quality={aqiInfo}
+        aqi={data.current.air_quality['us-epa-index']}
         illustration={illustration(weatherIcon(data.current.condition.code, data.current.is_day))}/>
-        <button onClick={changeView} className='change-view'>{">"}</button>
+        <button onClick={changeView} title={"view map"} className='change-view'>{">"}</button>
         </>
         )        
         ||
       (activeView === "map" && 
       <>
-      <button onClick={changeView} className='change-view'>{"<"}</button>
+      <button onClick={changeView} className='change-view' title={"view current weather"}>{"<"}</button>
       <Map position={[data.location.lat, data.location.lon]} zoom={13} city={data.location.name} country={data.location.country} temp={temperatureUnit === 'C' ? data.current.temp_c :  data.current.temp_f} temperatureUnit={temperatureUnit} />
       </>)
       

@@ -1,3 +1,14 @@
 {
-  
+  "header": {
+    "searchPlaceholder": "Enter city, zip code, or coordinates...",
+    "loading": "Loading...",
+    "changeLang": "ru"
+  },
+  "map": {
+    "weatherOverlays": "Weather Overlays:",
+    "temperature": "Temperature: ",
+    "cloudsPerc": "Clouds & precipitation: ",
+    "wind": "Wind: ",
+    "pressure": "Pressure: "
+  }
 }
