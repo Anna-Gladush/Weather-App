@@ -22,7 +22,7 @@ const Alert = ({alerts}: { alerts: weather_alert[]}): JSX.Element => {
   const [expanded, setExpanded] = useState(false);
   const [readInstruction, setReadInstruction] = useState(false)
   return (
-    <div className="alerts">
+    <div className={`alerts ${expanded ? "active" : ""}`}>
       <div>
         <p>Alerts ({alerts.length}):</p>
         <button onClick={()=> setExpanded((prev) => !prev)}>{!expanded ? "Expand" : "Hide"}</button>

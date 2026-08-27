@@ -1,4 +1,4 @@
-const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feelslike, humidity, pressure, visibility, direction, wind_km, uv, dewpoint, illustration}) => {
+const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feelslike, humidity, pressure, visibility, direction, wind_km, uv, dewpoint, air_quality, illustration}) => {
   return (
     <>
     <div className="today">
@@ -40,9 +40,13 @@ const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feel
           <div className="dew">
             <p>Dewpoint</p>
             <p>{dewpoint}°{temperatureUnit}</p>
-          </div>
+          </div>      
+          </div>        
         </div>
-      </div>
+        <div className="air-quality">
+        <p>Air Quility:</p>
+          <p>{air_quality}</p>
+        </div>
       <div className="illustration">
         <img alt="" src={`/illustrations/${illustration}.svg`} />
       </div>

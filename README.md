@@ -15,15 +15,14 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 <ul style="list-style-type: none;">
   <li>✓ - finds weather forecast based on your ip location, as well as through search</li>
   <li>✓ - custom weather icons + custom spinner (made in SVGATOR)</li>
-  <li></li>
+  <li>✓ - map view with temperature, wind, percipitation + clouds, pressure layers</li>
+  <li>✓ - aqi information</li>
 </ul>
 
 ## How to improve?
 
 <p>- css styling; adding mobile and tablet media queries;</p>
 <p>- tooltip "?" - adding description to params (wind speed, uv, pressure (?), humidity, visibility, dewpoint)</p>
-<p>- adding aqi;</p>
-<p>- adding map (rain)</p>
 <p>- adding translations to Russian</p>
 <p>- keyboard support</p>
 
@@ -32,6 +31,8 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 ## Live Preview
 
 ## What I learned + Addittional information
+
+How to work with leaflet, weatherAPI and OpenWeatherMap API; practiced custom useHooks;
 
 <table>
 <caption>Information about Weather Conditions codes from <a href="https://www.weatherapi.com/docs/weather_conditions.xml">WeatherAPI</a></caption>

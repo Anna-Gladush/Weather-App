@@ -11,7 +11,6 @@ import Map from './components/Map'
 import Alert from './components/Alert';
 
 let initial = false;
-let map = true;
 
 const App = (): JSX.Element => {
   const { data, loading, error, fetchWeather } = useWeather();
@@ -20,6 +19,12 @@ const App = (): JSX.Element => {
   const [query, setQuery] = useState('');
   const [date, setDate] = useState(0)
   const [activeView, setActiveView] = useState("weather")
+
+
+  const aqi_labels = ['', 'Good', 'Moderate', 'Unhealthy (Sensitive)', 'Unhealthy', 'Very Unhealthy', 'Hazardous'];
+
+  const aqi = data.current.air_quality?.['us-epa-index'];
+  const aqiInfo = aqi ? aqi_labels[aqi] : null;
 
   const changeView = () => {
     setActiveView(activeView === "weather" ? "map" : "weather")
@@ -95,7 +100,7 @@ const App = (): JSX.Element => {
 
   return (
     <div className='background'>
-      <Header city={data !== null ? data.location.name : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
+      <Header city={data !== null ? `${data.location.name}, ${data.location.country}` : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
       handleSearch={handleSearch} query={query} setQuery={setQuery} loading={loading}/>
       
       <div className='view'>
@@ -117,6 +122,7 @@ const App = (): JSX.Element => {
         wind_km={data.current.wind_kph}
         uv={data.current.uv}
         dewpoint={temperatureUnit === 'C' ? data.current.dewpoint_c :  data.current.dewpoint_f}
+        air_quality={aqiInfo}
         illustration={illustration(weatherIcon(data.current.condition.code, data.current.is_day))}/>
         <button onClick={changeView} className='change-view'>{">"}</button>
         </>
