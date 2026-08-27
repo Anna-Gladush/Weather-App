@@ -14,11 +14,16 @@ let initial = false;
 let map = true;
 
 const App = (): JSX.Element => {
+  const { data, loading, error, fetchWeather } = useWeather();
   const [currentTime, setCurrentTime] = useState(new Date())
   const [temperatureUnit, setTemperatureUnit] = useState('C');
   const [query, setQuery] = useState('');
   const [date, setDate] = useState(0)
-  const { data, loading, error, fetchWeather } = useWeather();
+  const [activeView, setActiveView] = useState("weather")
+
+  const changeView = () => {
+    setActiveView(activeView === "weather" ? "map" : "weather")
+  }
 
   const handleUnitChange = (type: string): void => {
     setTemperatureUnit(type === 'imperial' ?  'F': 'C');
@@ -92,7 +97,12 @@ const App = (): JSX.Element => {
     <div className='background'>
       <Header city={data !== null ? data.location.name : ""} temperatureUnit={temperatureUnit} handleUnitChange={handleUnitChange} time={format(currentTime, 'HH:mm')}
       handleSearch={handleSearch} query={query} setQuery={setQuery} loading={loading}/>
-      { data && <CurrentWeather
+      
+      <div className='view'>
+        { data && 
+        (activeView === "weather" && 
+        <>
+          <CurrentWeather
         code={weatherIcon(data.current.condition.code, data.current.is_day)} 
         temperatureUnit={temperatureUnit} 
         temp={temperatureUnit === 'C' ? data.current.temp_c :  data.current.temp_f}
@@ -107,9 +117,21 @@ const App = (): JSX.Element => {
         wind_km={data.current.wind_kph}
         uv={data.current.uv}
         dewpoint={temperatureUnit === 'C' ? data.current.dewpoint_c :  data.current.dewpoint_f}
-        illustration={illustration(weatherIcon(data.current.condition.code, data.current.is_day))}
-      />}
-
+        illustration={illustration(weatherIcon(data.current.condition.code, data.current.is_day))}/>
+        <button onClick={changeView} className='change-view'>{">"}</button>
+        </>
+        )        
+        ||
+      (activeView === "map" && 
+      <>
+      <button onClick={changeView} className='change-view'>{"<"}</button>
+      <Map position={[data.location.lat, data.location.lon]} zoom={13} city={data.location.name} country={data.location.country} temp={temperatureUnit === 'C' ? data.current.temp_c :  data.current.temp_f} temperatureUnit={temperatureUnit} />
+      </>)
+      
+      }
+      </div>
+      
+      
           {data && (
             <div className="date-buttons">
             { data.forecast.forecastday.map((day, id) => {
