@@ -12,13 +12,12 @@ export function useWeather() {
     setLoading(true)
     
     try {
-      const response =  await fetch(`${API_BASE_URL}/forecast.json?key=${API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes&pollen=yes`);
+      const response =  await fetch(`${API_BASE_URL}/forecast.json?key=${API_KEY}&q=${location}&days=3&aqi=yes&alerts=yes&pollen=yes`);
       const json = await response.json();
 
       if (!response.ok) {
         throw new Error(json.error?.message || 'Failed to fetch weather data');
       }
-      console.log(json)
       setData(json);
 
       if ([1000, 1003, 1006, 1009, 1066, 1210, 1216, 1222, 1255, 1258, 1261, 1264].includes(json.current.condition.code)) {

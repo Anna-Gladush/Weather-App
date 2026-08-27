@@ -38,7 +38,7 @@ const Header = ({city, temperatureUnit, handleUnitChange, time, handleSearch, qu
         <button className={`unit metric ${temperatureUnit === 'C' ? 'active' : 'not-active'}`} onClick={() => handleUnitChange('metric')}>°C</button>
         <button className={`unit imperial ${temperatureUnit === 'F' ? 'active' : 'not-active'}`} onClick={() => handleUnitChange('imperial')}>°F</button>
       </div>
-      <button onClick={handleChangeLanguage}>{t("changeLang")}</button>
+      <button onClick={handleChangeLanguage} className="change-lang">{t("header.changeLang")}</button>
     </header>
   )
 }

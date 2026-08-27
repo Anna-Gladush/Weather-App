@@ -47,7 +47,14 @@ header {
 button {
   cursor: pointer;
 }
-
+button.change-lang {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+}
 .button-metric {
   background-color: rgba(255, 255, 255, 0.35);
   display: flex;
@@ -169,7 +176,10 @@ main {
   border-radius: 10px;
   font-size: 1em;
 }
+.air-quality {
+  text-align: center;
 
+}
 span {
   font-size: 3em;
 }
@@ -193,7 +203,7 @@ sup {
   background: rgba(255, 255, 255, 0.2);
   height: 220px;
   width: fit-content;
-  text-wrap: pretty;
+  text-wrap: balance;
   border-radius: 10px;
   margin-left: 12px;
 }

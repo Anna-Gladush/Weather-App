@@ -1,6 +1,9 @@
 import type { JSX } from 'react';
+import 'react-tooltip/dist/react-tooltip.css'
+import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
+// Mine
 import { useWeather } from "./components/useWeather";
 import Header from "./components/Header";
 import CurrentWeather from "./components/CurrentWeather";
@@ -9,10 +12,6 @@ import { weatherIcon, illustration } from './code';
 import Loader from './components/Loader';
 import Map from './components/Map'
 import Alert from './components/Alert';
-import 'react-tooltip/dist/react-tooltip.css'
-import { useTranslation } from 'react-i18next';
-
-
 
 let initial = false;
 
@@ -23,7 +22,7 @@ const App = (): JSX.Element => {
   const [query, setQuery] = useState('');
   const [date, setDate] = useState(0)
   const [activeView, setActiveView] = useState("weather")
-  const { i18n, t } = useTranslation("translation")
+  const { i18n } = useTranslation("translation")
   
   const handleChangeLanguage = () => {
     const newLanguage = i18n.language === "ru" ? "en" : "ru";
@@ -53,7 +52,6 @@ const App = (): JSX.Element => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) fetchWeather(query.trim());
-    console.log(data)
   };
 
   const wheelHandler = (e) => {
@@ -120,7 +118,7 @@ const App = (): JSX.Element => {
         temp={temperatureUnit === 'C' ? data.current.temp_c :  data.current.temp_f}
         min={temperatureUnit === 'C' ? data.forecast.forecastday[0].day.mintemp_c : data.forecast.forecastday[0].day.mintemp_f}
         max={temperatureUnit === 'C' ? data.forecast.forecastday[0].day.maxtemp_c : data.forecast.forecastday[0].day.maxtemp_f}
-        condition={data.current.condition.text}
+        condition={data.current.condition.code}
         feelslike={temperatureUnit === 'C' ? data.current.feelslike_c :  data.current.feelslike_f}
         humidity={data.current.humidity}
         pressure={temperatureUnit === 'C' ? (Math.round(data.current.pressure_mb *  0.75)) : data.current.pressure_mb}
