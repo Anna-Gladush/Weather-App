@@ -25,7 +25,6 @@ const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feel
   const { t } = useTranslation("translation");
 
   const aqi_labels = ['', t("aqi.good"), t("aqi.moderate"), t("aqi.sensitive"), t("aqi.unhealthy"), t("aqi.veryUnhealthy"), t("aqi.hazardous")];
-  const uv_labels = {low: t("uv.low.instruction"), moderate: t("uv.moderate.instruction"), high: t("uv.high.instruction"), veryHigh: t("uv.veryHigh.instruction"), extreme: t("uv.extreme.instruction")};
   
   const aqiInfo = aqi_labels[aqi];
   const wind = Math.floor(wind_km * 1000/ 3600);
@@ -34,11 +33,11 @@ const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feel
     <>
     <div className="today">
       <div className="day">
-        <p className="current-title">{t("current.today")}</p>
+        <h2 className="current-title">{t("current.today")}</h2>
         <div className="day-info">
           <div className="info-left">
             <span>{temp}</span><sup>°{temperatureUnit}</sup>
-            <img src={`/icons/weather/${code}.svg`} alt="current weather icon" />
+            <img src={`/icons/weather/${code}.svg`} alt={"current weather icon"} />
           </div>
           <div className="info-right">
             <p>{t(`weatherCondition.${condition}`)}</p>
@@ -99,27 +98,22 @@ const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feel
             id="uv-tooltip" 
             style={{ maxWidth: "250px", whiteSpace: "normal" }}
             />
-            {uv < 3 ? (<>
+            {uv < 3 ? (
               <p>{t("uv.low.label")}</p>
-              <p>{uv_labels.low}</p>
-            </>) : (
-              uv < 6 ? (<>
-              <p>{t("uv.modearte.label")}</p>
-              <p>{uv_labels.moderate}</p>
-              </>) : (uv < 8 ? (<>
+            ) : (
+              uv < 6 ? (
+              <p>{t("uv.moderate.label")}</p>
+              ) : (uv < 8 ? (
               <p>{t("uv.high.label")}</p>
-              <p>{uv_labels.high}</p>
-              </>) : (uv < 11 ? (<>
+              ) : (uv < 11 ? (
               <p>{t("uv.veryHigh.label")}</p>
-              <p>{uv_labels.veryHigh}</p>
-              </>) : (<>
+              ) : 
               <p>{t("uv.extreme.label")}</p>
-              <p>{uv_labels.extreme}</p>
-              </>)))
-            )}
+              )))
+            }
           </div>
       <div className="illustration">
-        <img alt="girl" src={`/illustrations/${illustration}.svg`} />
+        <img alt="girl" src={`/illustrations/${illustration}.svg`} fetchPriority="high"/>
       </div>
     </div>
     </>

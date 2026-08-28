@@ -19,7 +19,7 @@ const Header = ({city, temperatureUnit, handleUnitChange, time, handleSearch, qu
     <header>
       <div className="city">
         <img src="/icons/map.svg" alt="map" width={25}/>
-        <p id="city">{city}</p>
+        <h1>{city}</h1>
       </div>
 
       <p>{time}</p>
@@ -29,8 +29,9 @@ const Header = ({city, temperatureUnit, handleUnitChange, time, handleSearch, qu
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("header.searchPlaceholder")}
+          aria-label={`To search a city ${t("header.searchPlaceholder")}`}
         />
-        <button type="submit" className="search-button" disabled={loading}>
+        <button type="submit" className="search-button" disabled={loading}>Search
           {loading ? t("header.loading") : ''}
         </button>
       </form>

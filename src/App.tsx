@@ -24,12 +24,12 @@ const App = (): JSX.Element => {
   const [activeView, setActiveView] = useState("weather")
   const { i18n } = useTranslation("translation")
   
-  const handleChangeLanguage = () => {
+  const handleChangeLanguage = (): void => {
     const newLanguage = i18n.language === "ru" ? "en" : "ru";
     i18n.changeLanguage(newLanguage);
   }
 
-  const changeView = () => {
+  const changeView = (): void => {
     setActiveView(activeView === "weather" ? "map" : "weather")
   }
 
@@ -37,7 +37,7 @@ const App = (): JSX.Element => {
     setTemperatureUnit(type === 'imperial' ?  'F': 'C');
   }
 
-  const handleDateChange = (e, date) => {
+  const handleDateChange = (e, date: string):void => {
     const btns = document.querySelectorAll(".date");
     btns.forEach(btn => {
       btn.classList.remove("current");
@@ -49,12 +49,12 @@ const App = (): JSX.Element => {
     })
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = (e): void => {
     e.preventDefault();
     if (query.trim()) fetchWeather(query.trim());
   };
 
-  const wheelHandler = (e) => {
+  const wheelHandler = (e): void => {
     const container = document.querySelector('.forecast');
     if (e.deltaY !== 0) {
       e.preventDefault();

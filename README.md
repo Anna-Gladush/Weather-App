@@ -14,7 +14,7 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 ## Features
 
 <ul style="list-style-type: none;">
-  <li>✓ - finds weather forecast based on your ip location, as well as through search</li>
+  <li>✓ - finds weather forecast based on your IP location, as well as through search</li>
   <li>✓ - custom weather icons + custom spinner (made in SVGATOR)</li>
   <li>✓ - map view with temperature, wind, percipitation + clouds, pressure layers</li>
   <li>✓ - AQI and UV information</li>
@@ -22,13 +22,9 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
   <li>✓ - en/ru translation</li>
 </ul>
 
-## How to improve?
-
-<p>- keyboard support</p>
-
 ## Running the project
 
-1. You need to have an OpenWeather Account and WeatherAPI Account, follow the instructions described <a href="https://openweathermap.org/api">here</a> and <a href="https://www.weatherapi.com/signup.aspx">here</a> to create an account and grab an API key.
+1. YYou need an OpenWeather Account and a WeatherAPI account., follow the instructions <a href="https://openweathermap.org/api">here</a> and <a href="https://www.weatherapi.com/signup.aspx">here</a> to create an account and grab an API key.
 
 2. Clone the repository
 
@@ -44,15 +40,22 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 
 ## Live Preview
 
+<img src="./src/assets/20260828104746.png" alt="desktop current weather view"/>
+<img src="./src/assets/20260828104918.png" alt="desktop map view"/>
+<img src="./src/assets/20260828104821.png" alt="mobile current weather view"/>
+<img src="./src/assets/20260828104846.png" alt="mobile map view"/>
+
+<img src="./src/assets/WeatherApp.gif" alt="demo"/>
+
 ## What I learned
 
-How to work with leaflet, weatherAPI and OpenWeatherMap API; practiced custom useHooks;
+How to work with Leaflet, weatherAPI, and OpenWeatherMap API; practiced custom useHooks;
 
 ## Resources:
 
-- Woman in different seasons illustaration set: <a href="https://www.freepik.com/free-vector/woman-different-seasons-set_5889720.htm#fromView=search&page=1&position=33&uuid=a92f24d5-e6d9-4acc-a5eb-562bfe6613e8&query=human+weather">Image by pch.vector on Freepik</a>
+- Woman in different seasons illustration set: <a href="https://www.freepik.com/free-vector/woman-different-seasons-set_5889720.htm#fromView=search&page=1&position=33&uuid=a92f24d5-e6d9-4acc-a5eb-562bfe6613e8&query=human+weather">Image by pch.vector on Freepik</a>
 
-## Addittional information
+## Additional information
 
 Reference for wind direction degree range:
 

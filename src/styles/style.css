@@ -83,7 +83,7 @@ button.change-lang {
 .city {
   display: flex;
   align-items: center;
-  font-size: 1.3em;
+  font-size: 0.7em;
 }
 .city img {
   margin-right: 10px;
@@ -108,6 +108,7 @@ input {
   background-position: center;
   background-repeat: no-repeat;
   background-color:  transparent;
+  color: transparent;
   /* opacity: 30%; */
   background-size: 25px;
   width: 60px;
@@ -365,7 +366,7 @@ button.change-view {
   padding-block: 10px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1200px), (max-height: 900px) {
+@media screen and (min-width: 320px) and (max-width: 1000px), (max-height: 700px) {
   .background {
     width: auto;
     height: auto;
@@ -375,7 +376,7 @@ button.change-view {
     flex-direction: column;
     gap: 10px;
   }
-  header p#city {
+  header h1#city {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
