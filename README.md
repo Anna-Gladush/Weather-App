@@ -39,13 +39,17 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 <code>VITE_OPENWEATHER_API=`<your OpenWeather API Key>`</code>
 
 ## Live Preview
+<img src="./src/assets/WeatherApp.gif" alt="demo"/>
 
 <img src="./src/assets/20260828104746.png" alt="desktop current weather view"/>
 <img src="./src/assets/20260828104918.png" alt="desktop map view"/>
-<img src="./src/assets/20260828104821.png" alt="mobile current weather view"/>
-<img src="./src/assets/20260828104846.png" alt="mobile map view"/>
+<div style="display: "flex";">
+  <img src="./src/assets/20260828104821.png" width="300px" alt="mobile current weather view"/>
+  <img src="./src/assets/20260828104846.png" width="500px" alt="mobile map view"/>
+</div>
 
-<img src="./src/assets/WeatherApp.gif" alt="demo"/>
+
+
 
 ## What I learned
 
