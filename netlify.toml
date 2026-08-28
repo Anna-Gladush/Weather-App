@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api/ip"
+  to = "http://ip-api.com/json/?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,query"
+  status = 200
+  force = true

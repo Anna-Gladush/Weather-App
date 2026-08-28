@@ -11,7 +11,7 @@ i18n
   .init({
     fallbackLng: "en",
     backend: {
-      loadPath: "/public/locales/{{lng}}/translation.json"
+      loadPath: "/public/locales/{{lng}}/{{ns}}.json"
     }
   });
 

@@ -65,7 +65,7 @@ const App = (): JSX.Element => {
   // Initial weather, from ip
   useEffect(() => {
     if (!initial) {
-      fetch(`http://ip-api.com/json/?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,query`)
+      fetch(`/api/ip`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Couldn't fetch adress")
