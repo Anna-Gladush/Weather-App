@@ -51,7 +51,7 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 
 ## Metrics
 
-<img scr="./src/assets/metrics.png" alt="metrics">
+<img src="./src/assets/metrics.png" alt="metrics">
 
 ## How to improve?
 
