@@ -39,6 +39,7 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
 <code>VITE_OPENWEATHER_API=`<your OpenWeather API Key>`</code>
 
 ## Live Preview
+
 <img src="./src/assets/WeatherApp.gif" alt="demo"/>
 
 <img src="./src/assets/20260828104746.png" alt="desktop current weather view"/>
@@ -48,8 +49,13 @@ Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">Weathe
   <img src="./src/assets/20260828104846.png" width="500px" alt="mobile map view"/>
 </div>
 
+## Metrics
 
+<img scr="./src/assets/metrics.png" alt="metrics">
 
+## How to improve?
+
+- fix issue with 3rd party cookies (svgator, ip)
 
 ## What I learned
 
@@ -58,26 +64,3 @@ How to work with Leaflet, weatherAPI, and OpenWeatherMap API; practiced custom u
 ## Resources:
 
 - Woman in different seasons illustration set: <a href="https://www.freepik.com/free-vector/woman-different-seasons-set_5889720.htm#fromView=search&page=1&position=33&uuid=a92f24d5-e6d9-4acc-a5eb-562bfe6613e8&query=human+weather">Image by pch.vector on Freepik</a>
-
-## Additional information
-
-Reference for wind direction degree range:
-
-<table>
-  <tr>
-    <th>Wind direction</th>
-    <th>Beaufort Scale</th>
-  </tr>
-  <tr>
-    <td><img src="https://www.researchgate.net/profile/Richard-Siewierski-2/publication/265538256/figure/tbl1/AS:669415825739783@1536612578236/1-These-are-the-standard-sixteen-wind-rose-wind-directions-and-their-corresponding.png">
-    Figure - 16 standard wind rose wind directions and their corresponding degree ranges.</td>
-    <td><img src="https://www.researchgate.net/profile/Richard-Siewierski-2/publication/265538256/figure/tbl2/AS:669415825747983@1536612578259/These-are-the-standard-Beaufort-wind-speed-classifications-with-corresponding-wind-speed.png">
-    Figure - standard Beaufort wind speed classifications with corresponding wind speed ranges in metric units.</td>
-  </tr>
-</table>
-
-Taken from article: <a href="https://www.researchgate.net/publication/265538256_An_Analysis_of_Seasonal_Sea_Ice_off_the_Coast_of_Cape_Dorset_Nunavut_Canada">Siewierski, Richard. An Analysis of Seasonal Sea Ice off the Coast of Cape Dorset, Nunavut, Canada</a>. Pictures are uploaded by <a href="https://www.researchgate.net/profile/Richard-Siewierski-2">Richard Siewierski</a> <a name="one">[1]</a>.
-
-## Citations:
-
-[1](#one) - Siewierski R. An Analysis of Seasonal Sea Ice off the Coast of Cape Dorset, Nunavut, Canada : дис. – 2010.

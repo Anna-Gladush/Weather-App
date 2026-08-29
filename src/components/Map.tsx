@@ -5,6 +5,10 @@ import L from "leaflet";
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import iconMarker from 'leaflet/dist/images/marker-icon.png';
+import iconRetina from 'leaflet/dist/images/marker-icon-2x.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
 type MapProps = {
   position: [number, number],
   zoom: number,
@@ -23,7 +27,11 @@ const Map = ({position, zoom, city, country, temp, temperatureUnit}: MapProps): 
     wind: false,
     pressure: false
   })
-
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: iconRetina,
+    iconUrl: iconMarker,
+    shadowUrl: iconShadow,
+  });
   return (
     <>
       <form className='map-options'>
@@ -67,7 +75,7 @@ const Map = ({position, zoom, city, country, temp, temperatureUnit}: MapProps): 
         {/* Base Layer */}
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          <Marker position={position} icon={L.icon({iconUrl: "/icons/map.svg", iconSize: [38, 38], iconAnchor: position})}>
+          <Marker position={position}>
             <Popup>
               {city}, {country} 
               <br /> 
