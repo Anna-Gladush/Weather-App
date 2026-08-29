@@ -1,6 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from "leaflet";
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -66,7 +67,7 @@ const Map = ({position, zoom, city, country, temp, temperatureUnit}: MapProps): 
         {/* Base Layer */}
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          <Marker position={position}>
+          <Marker position={position} icon={L.icon({iconUrl: "/icons/map.svg", iconSize: [38, 38], iconAnchor: position})}>
             <Popup>
               {city}, {country} 
               <br /> 

@@ -75,7 +75,7 @@ const CurrentWeather = ({ code, temperatureUnit, temp, min, max, condition, feel
             <p>{wind} {t("current.ms")}</p>
           </div>
           <div className="air-quality">
-            <p style={{fontWeight: "bold"}}>{t("current.airQuality")} <a data-tooltip-id="air-quality-tooltip" data-tooltip-content={t("current.sirQualityTooltip")} className="mark">?</a> </p>
+            <p style={{fontWeight: "bold"}}>{t("current.airQuality")} <a data-tooltip-id="air-quality-tooltip" data-tooltip-content={t("current.airQualityTooltip")} className="mark">?</a> </p>
             <Tooltip 
             id="air-quality-tooltip"
             style={{ maxWidth: "250px", whiteSpace: "normal" }}
